@@ -17,3 +17,19 @@ const kUnselectedColor = Color(0xFFD8D2CF);
 const defaultPadding = 15.00;
 
 const loginBackgroundImg = 'assets/images/Login_Background.jpg';
+
+bool isEmail(String value) {
+  String regex =
+      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+
+  RegExp regExp = new RegExp(regex);
+
+  return value.isNotEmpty && regExp.hasMatch(value);
+}
+
+bool isNRIC(String value) {
+  String regex = r'[STFG]\d{7}[A-Z]$';
+  RegExp regExp = new RegExp(regex);
+
+  return value.isNotEmpty && regExp.hasMatch(value.toUpperCase());
+}

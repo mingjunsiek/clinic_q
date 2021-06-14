@@ -1,6 +1,10 @@
 import 'package:clinic_q/utils/constants.dart';
 import 'package:clinic_q/utils/size_helpers.dart';
+import 'package:clinic_q/views/sign_up_page_personal.dart';
+import 'package:clinic_q/widgets/FormSpacing.dart';
+import 'package:clinic_q/widgets/FormTextField.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({
@@ -42,10 +46,10 @@ class _LoginPageState extends State<LoginPage> {
           fit: BoxFit.cover,
         ),
       ),
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        body: SafeArea(
-          child: Center(
+      child: SafeArea(
+        child: Scaffold(
+          backgroundColor: Colors.transparent,
+          body: Center(
             child: Container(
               padding: EdgeInsets.all(defaultPadding),
               child: Column(
@@ -73,25 +77,23 @@ class _LoginPageState extends State<LoginPage> {
                               height: displayHeight(context) * 0.4,
                             ),
                             FormTextField(
-                              labelText: "Email",
-                              validatorFunction: (value) => !isEmail(value)
-                                  ? "Sorry, we do not recognize this email address"
+                              labelText: "NRIC",
+                              fieldKeyboardType: TextInputType.visiblePassword,
+                              validatorFunction: (value) => !isNRIC(value)
+                                  ? "Sorry, we do not recognize this NRIC"
                                   : null,
                             ),
-                            SizedBox(
-                              height: displayHeight(context) * 0.03,
-                            ),
 
+                            FormSpacing(),
                             FormTextField(
                               labelText: "Password",
+                              fieldKeyboardType: TextInputType.visiblePassword,
                               isPassword: true,
                               validatorFunction: (value) => value.length <= 6
                                   ? "Password must be 6 or more characters in length"
                                   : null,
                             ),
-                            SizedBox(
-                              height: displayHeight(context) * 0.03,
-                            ),
+                            FormSpacing(),
                             SizedBox(
                               width: double.infinity,
                               child: ElevatedButton(
@@ -116,7 +118,7 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                             // Spacer(),
                             TextButton(
-                              onPressed: () {},
+                              onPressed: () => Get.to(SignUpPagePersonal()),
                               child: Text(
                                 "Sign Up",
                               ),
@@ -131,80 +133,6 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
           ),
-        ),
-      ),
-    );
-  }
-}
-
-bool isEmail(String value) {
-  String regex =
-      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-
-  RegExp regExp = new RegExp(regex);
-
-  return value.isNotEmpty && regExp.hasMatch(value);
-}
-
-class FormTextField extends StatelessWidget {
-  const FormTextField({
-    Key? key,
-    this.labelText,
-    this.isPassword = false,
-    this.validatorFunction,
-    this.controller,
-  }) : super(key: key);
-
-  final labelText;
-  final isPassword;
-  final validatorFunction;
-  final controller;
-
-  @override
-  Widget build(BuildContext context) {
-    final customInputBorder = OutlineInputBorder(
-      borderSide: BorderSide.none,
-      borderRadius: BorderRadius.circular(20),
-    );
-    return
-        // Container(
-        //   padding: EdgeInsets.symmetric(
-        //     horizontal: defaultPadding,
-        //   ),
-        //   decoration: BoxDecoration(
-        //     // color: kTextFormFieldColor,
-        //     boxShadow: [
-        //       BoxShadow(
-        //         color: Colors.grey.withOpacity(0.3),
-        //         spreadRadius: 1,
-        //         blurRadius: 5,
-        //         offset: Offset(0, 3), // changes position of shadow
-        //       ),
-        //     ],
-        //     // borderRadius: BorderRadius.circular(10),
-        //   ),
-        Material(
-      color: Colors.transparent,
-      elevation: 18,
-      shadowColor: Colors.grey[50],
-      borderRadius: BorderRadius.circular(20),
-      child: TextFormField(
-        validator: validatorFunction,
-        obscureText: isPassword ? true : false,
-        style: TextStyle(color: Colors.black),
-        decoration: InputDecoration(
-          border: customInputBorder,
-          focusedBorder: customInputBorder,
-          enabledBorder: customInputBorder,
-          errorBorder: customInputBorder,
-          filled: true,
-          fillColor: kTextFormFieldColor,
-          labelStyle: TextStyle(
-            color: kTextFieldColor,
-            fontWeight: FontWeight.bold,
-            fontSize: 20,
-          ),
-          labelText: labelText,
         ),
       ),
     );
