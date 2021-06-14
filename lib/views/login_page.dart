@@ -1,6 +1,7 @@
 import 'package:clinic_q/utils/constants.dart';
 import 'package:clinic_q/utils/size_helpers.dart';
 import 'package:clinic_q/views/sign_up_page_personal.dart';
+import 'package:clinic_q/views/taskbar.dart';
 import 'package:clinic_q/widgets/FormSpacing.dart';
 import 'package:clinic_q/widgets/FormTextField.dart';
 import 'package:flutter/material.dart';
@@ -101,11 +102,13 @@ class _LoginPageState extends State<LoginPage> {
                                   primary: Color(0xFFC08E5F),
                                 ),
                                 onPressed: () {
-                                  if (_formKey.currentState!.validate()) {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                            content: Text('Processing Data')));
-                                  }
+                                  Get.to(() => TaskBarScreen());
+                                  // if (_formKey.currentState!.validate()) {
+                                  //   ScaffoldMessenger.of(context).showSnackBar(
+                                  //       SnackBar(
+                                  //           content: Text('Processing Data')));
+                                  //   Get.to(HomePage());
+                                  // }
                                 },
                                 child: Text(
                                   'Login',
@@ -118,7 +121,8 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                             // Spacer(),
                             TextButton(
-                              onPressed: () => Get.to(SignUpPagePersonal()),
+                              onPressed: () =>
+                                  Get.to(() => SignUpPagePersonal()),
                               child: Text(
                                 "Sign Up",
                               ),
