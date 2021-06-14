@@ -9,6 +9,7 @@ const kDirectionBtnColor = Color(0xFF1B74E8);
 const kEditBtnColor = Color(0xFFAB7A76);
 const kCancelBtnColor = Color(0xFFF44336);
 const kUnselectedColor = Color(0xFFD8D2CF);
+// const kUnselectedTextColor = Color(0xFFA7A19E);
 // const kPrimaryGradientColor = LinearGradient(
 //   begin: Alignment.topLeft,
 //   end: Alignment.bottomRight,
@@ -32,4 +33,11 @@ bool isNRIC(String value) {
   RegExp regExp = new RegExp(regex);
 
   return value.isNotEmpty && regExp.hasMatch(value.toUpperCase());
+}
+
+bool isPhoneNum(String value) {
+  String regex = r'[89]\d{7}$';
+  RegExp regExp = new RegExp(regex);
+
+  return value.isNotEmpty && regExp.hasMatch(value);
 }
