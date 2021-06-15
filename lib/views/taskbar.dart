@@ -1,4 +1,5 @@
 import 'package:clinic_q/views/home_page.dart';
+import 'package:clinic_q/views/google_map.dart';
 import 'package:clinic_q/views/setting_page.dart';
 import 'package:clinic_q/utils/constants.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +15,7 @@ class TaskBarScreen extends StatefulWidget {
 class _TaskBarScreenState extends State<TaskBarScreen> {
   int pageIndex = 0.obs();
   List<Widget> pageList = <Widget>[
-    HomePage(),
+    MapScreen(),
     SettingPage(),
   ];
   @override
