@@ -1,13 +1,12 @@
 import 'dart:async';
+import 'package:clinic_q/utils/size_helpers.dart';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:clinic_q/utils/constants.dart';
+import 'package:location/location.dart';
+import 'package:clinic_q/widgets/FormTextField.dart';
 import 'package:get/get.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
-import 'package:location/location.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:clinic_q/utils/size_helpers.dart';
-import 'package:clinic_q/utils/constants.dart';
-import 'package:clinic_q/widgets/FormTextField.dart';
-import 'package:clinic_q/widgets/Panel_widget.dart';
 
 class MapScreen extends StatefulWidget {
   @override
@@ -21,10 +20,10 @@ class _MapScreenState extends State<MapScreen> {
   final Set<Marker> _clinicMarkers = {};
 
 // slider
-  final initFabHeight = 125.0;
-  final fabHeight = 0.0.obs;
-  final panelHeightOpen = 0.0.obs;
-  final panelHeightClosed = 100.0.obs;
+  final double _initFabHeight = 125.0;
+  double _fabHeight = 0;
+  double _panelHeightOpen = 0;
+  double _panelHeightClosed = 100.0;
 
   LatLng _initialCameraPosition =
       LatLng(1.3538107695634425, 103.85797370238132);
@@ -33,7 +32,7 @@ class _MapScreenState extends State<MapScreen> {
   void initState() {
     // TODO: implement initState
     checkForLocationPermission();
-    fabHeight.value = initFabHeight;
+    _fabHeight = _initFabHeight;
     super.initState();
   }
 
@@ -45,30 +44,21 @@ class _MapScreenState extends State<MapScreen> {
     if (!_serviceEnabled) {
       _serviceEnabled = await _location.requestService();
       if (!_serviceEnabled) {
-        Get.defaultDialog(
-          title: 'You currently do not have any services',
-          titleStyle: TextStyle(color: Colors.black),
-          textConfirm: 'Okay',
-          confirmTextColor: Colors.white,
-          onConfirm: () => Get.back(),
-        );
         return;
       }
+    } else {
+      print('service enabled');
     }
 
     _permissionGranted = await _location.hasPermission();
     if (_permissionGranted == PermissionStatus.denied) {
       _permissionGranted = await _location.requestPermission();
       if (_permissionGranted != PermissionStatus.granted) {
-        Get.defaultDialog(
-          title: 'Please enable permission in your settings',
-          titleStyle: TextStyle(color: Colors.black),
-          textConfirm: 'Okay',
-          confirmTextColor: Colors.white,
-          onConfirm: () => Get.back(),
-        );
+        print('permission not granted');
         return;
       }
+    } else {
+      print('permission granted');
     }
 
     _locationData = await _location.getLocation();
@@ -131,20 +121,52 @@ class _MapScreenState extends State<MapScreen> {
     );
   }
 
+  Widget _scrollingList(ScrollController sc) {
+    final items = List<String>.generate(10, (i) => "Item $i");
+
+    return Column(
+      children: [
+        SizedBox(
+          height: 30.0,
+        ),
+        Container(
+          height: 5.0,
+          width: 30.0,
+          color: kPrimaryBtnColor,
+        ),
+        Expanded(
+          child: ListView.builder(
+              controller: sc,
+              itemCount: items.length,
+              itemBuilder: (context, index) {
+                return Card(
+                    child: ListTile(
+                  onTap: () {},
+                  title: Text(
+                    '${items[index]}',
+                    style: TextStyle(color: Colors.black),
+                  ),
+                ));
+              }),
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    panelHeightOpen.value = MediaQuery.of(context).size.height - 300;
+    _panelHeightOpen = MediaQuery.of(context).size.height - 300;
 
     return Material(
       child: Stack(
         alignment: Alignment.topCenter,
         children: <Widget>[
           SlidingUpPanel(
-            maxHeight: panelHeightOpen(),
-            minHeight: panelHeightClosed(),
+            maxHeight: _panelHeightOpen,
+            minHeight: _panelHeightClosed,
             parallaxEnabled: true,
             parallaxOffset: 0.5,
-            panelBuilder: (ScrollController sc) => PanelWidget(controller: sc),
+            panelBuilder: (ScrollController sc) => _scrollingList(sc),
             body: Center(
               child: _googleMap(),
             ),
@@ -152,12 +174,14 @@ class _MapScreenState extends State<MapScreen> {
               topLeft: Radius.circular(24.0),
               topRight: Radius.circular(24.0),
             ),
-            onPanelSlide: (double pos) => fabHeight.value =
-                pos * (panelHeightOpen() - panelHeightClosed()) + initFabHeight,
+            onPanelSlide: (double pos) => setState(() {
+              _fabHeight = pos * (_panelHeightOpen - _panelHeightClosed) +
+                  _initFabHeight;
+            }),
           ),
           Positioned(
             right: 20.0,
-            bottom: fabHeight(),
+            bottom: _fabHeight,
             child: FloatingActionButton(
               child: Icon(
                 Icons.gps_fixed,
@@ -176,8 +200,8 @@ class _MapScreenState extends State<MapScreen> {
           Container(
             padding: EdgeInsets.only(
               top: 70.0,
-              left: defaultPadding,
-              right: defaultPadding,
+              left: 8.0,
+              right: 8.0,
             ),
             child: FormTextField(
               labelText: "SEARCH CLINICS",
