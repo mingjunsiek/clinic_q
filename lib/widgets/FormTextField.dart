@@ -10,6 +10,7 @@ class FormTextField extends StatelessWidget {
     this.controller,
     this.fieldKeyboardType,
     this.maxLine = 1,
+    this.textFormFieldTapped,
   }) : super(key: key);
 
   final labelText;
@@ -18,6 +19,7 @@ class FormTextField extends StatelessWidget {
   final controller;
   final fieldKeyboardType;
   final maxLine;
+  final textFormFieldTapped;
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +50,8 @@ class FormTextField extends StatelessWidget {
       shadowColor: Colors.grey[50],
       borderRadius: BorderRadius.circular(20),
       child: TextFormField(
+        controller: controller,
+        onTap: textFormFieldTapped,
         keyboardType: fieldKeyboardType,
         validator: validatorFunction,
         obscureText: isPassword ? true : false,

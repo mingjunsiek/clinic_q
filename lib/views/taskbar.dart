@@ -2,7 +2,6 @@ import 'package:clinic_q/views/home_page.dart';
 import 'package:clinic_q/views/setting_page.dart';
 import 'package:clinic_q/utils/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class TaskBarScreen extends StatefulWidget {
   const TaskBarScreen({Key? key}) : super(key: key);
@@ -12,7 +11,7 @@ class TaskBarScreen extends StatefulWidget {
 }
 
 class _TaskBarScreenState extends State<TaskBarScreen> {
-  int pageIndex = 0.obs();
+  int pageIndex = 0;
   List<Widget> pageList = <Widget>[
     HomePage(),
     SettingPage(),

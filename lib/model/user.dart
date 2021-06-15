@@ -1,42 +1,40 @@
 import 'dart:convert';
 
-import 'package:clinic_q/model/address.dart';
-
 class User {
   String nric;
+  String email;
   String firstName;
   String lastName;
   String phone;
   DateTime dob;
-  Address address;
   String allergies;
 
   User({
     required this.nric,
+    required this.email,
     required this.firstName,
     required this.lastName,
     required this.phone,
     required this.dob,
-    required this.address,
     required this.allergies,
   });
 
   User copyWith({
     String? nric,
+    String? email,
     String? firstName,
     String? lastName,
     String? phone,
     DateTime? dob,
-    Address? address,
     String? allergies,
   }) {
     return User(
       nric: nric ?? this.nric,
+      email: email ?? this.email,
       firstName: firstName ?? this.firstName,
       lastName: lastName ?? this.lastName,
       phone: phone ?? this.phone,
       dob: dob ?? this.dob,
-      address: address ?? this.address,
       allergies: allergies ?? this.allergies,
     );
   }
@@ -44,11 +42,11 @@ class User {
   Map<String, dynamic> toMap() {
     return {
       'nric': nric,
+      'email': email,
       'firstName': firstName,
       'lastName': lastName,
       'phone': phone,
       'dob': dob.millisecondsSinceEpoch,
-      'address': address.toMap(),
       'allergies': allergies,
     };
   }
@@ -56,11 +54,11 @@ class User {
   factory User.fromMap(Map<String, dynamic> map) {
     return User(
       nric: map['nric'],
+      email: map['email'],
       firstName: map['firstName'],
       lastName: map['lastName'],
       phone: map['phone'],
       dob: DateTime.fromMillisecondsSinceEpoch(map['dob']),
-      address: Address.fromMap(map['address']),
       allergies: map['allergies'],
     );
   }
@@ -71,7 +69,7 @@ class User {
 
   @override
   String toString() {
-    return 'User(nric: $nric, firstName: $firstName, lastName: $lastName, phone: $phone, dob: $dob, address: $address, allergies: $allergies)';
+    return 'User(nric: $nric, email: $email, firstName: $firstName, lastName: $lastName, phone: $phone, dob: $dob, allergies: $allergies)';
   }
 
   @override
@@ -80,22 +78,22 @@ class User {
 
     return other is User &&
         other.nric == nric &&
+        other.email == email &&
         other.firstName == firstName &&
         other.lastName == lastName &&
         other.phone == phone &&
         other.dob == dob &&
-        other.address == address &&
         other.allergies == allergies;
   }
 
   @override
   int get hashCode {
     return nric.hashCode ^
+        email.hashCode ^
         firstName.hashCode ^
         lastName.hashCode ^
         phone.hashCode ^
         dob.hashCode ^
-        address.hashCode ^
         allergies.hashCode;
   }
 }

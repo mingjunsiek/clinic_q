@@ -1,3 +1,4 @@
+import 'package:clinic_q/views/taskbar.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -12,7 +13,6 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Container(
       child: Scaffold(
-        backgroundColor: Colors.transparent, //should be transparent
         body: SafeArea(
           child: Column(
             children: [

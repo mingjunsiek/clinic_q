@@ -1,6 +1,7 @@
+import 'package:clinic_q/controllers/signup_controller.dart';
 import 'package:clinic_q/utils/constants.dart';
 import 'package:clinic_q/utils/size_helpers.dart';
-import 'package:clinic_q/views/sign_up_page_password.dart';
+import 'package:clinic_q/views/sign_up_page_account.dart';
 import 'package:clinic_q/widgets/FormSpacing.dart';
 import 'package:clinic_q/widgets/FormTextField.dart';
 import 'package:clinic_q/widgets/PrimaryButton.dart';
@@ -8,13 +9,21 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SignUpPageAllergies extends StatefulWidget {
-  SignUpPageAllergies({Key? key}) : super(key: key);
-
   @override
   _SignUpPageAllergiesState createState() => _SignUpPageAllergiesState();
 }
 
 class _SignUpPageAllergiesState extends State<SignUpPageAllergies> {
+  final signUpController = Get.find<SignUpController>();
+
+  TextEditingController _allergiesController = TextEditingController();
+
+  @override
+  void dispose() {
+    super.dispose();
+    _allergiesController.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,7 +59,7 @@ class _SignUpPageAllergiesState extends State<SignUpPageAllergies> {
                         FormTextField(
                           labelText: "Input your allergies if any...",
                           maxLine: 4,
-                          // validatorFunction: null,
+                          controller: _allergiesController,
                           fieldKeyboardType: TextInputType.visiblePassword,
                         ),
                         FormSpacing(),
@@ -59,7 +68,9 @@ class _SignUpPageAllergiesState extends State<SignUpPageAllergies> {
                             PrimaryButton(
                                 buttonText: 'Next',
                                 btnFunction: () {
-                                  Get.to(() => SignUpPagePassword());
+                                  signUpController
+                                      .setAllergies(_allergiesController.text);
+                                  Get.to(() => SignUpPageAccount());
                                 }),
                             // Spacer(),
                             TextButton(

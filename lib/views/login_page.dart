@@ -1,7 +1,8 @@
+import 'package:clinic_q/controllers/login_controller.dart';
 import 'package:clinic_q/utils/constants.dart';
 import 'package:clinic_q/utils/size_helpers.dart';
+import 'package:clinic_q/views/home_page.dart';
 import 'package:clinic_q/views/sign_up_page_personal.dart';
-import 'package:clinic_q/views/taskbar.dart';
 import 'package:clinic_q/widgets/FormSpacing.dart';
 import 'package:clinic_q/widgets/FormTextField.dart';
 import 'package:clinic_q/widgets/PrimaryButton.dart';
@@ -18,29 +19,22 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  // late final TextEditingController _emailController;
-  // late final TextEditingController _passwordController;
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _emailController = TextEditingController();
-  //   _passwordController = TextEditingController();
-
-  // }
-
-  // @override
-  // void dispose() {
-  //   // TODO: implement dispose
-  //   super.dispose();
-  //   _emailController.dispose()
-  //   _passwordController.dispose()
-  // }
+  @override
+  void dispose() {
+    super.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
+    final loginController = Get.put(LoginController());
+
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
@@ -80,9 +74,10 @@ class _LoginPageState extends State<LoginPage> {
                               height: displayHeight(context) * 0.4,
                             ),
                             FormTextField(
-                              labelText: "NRIC",
+                              labelText: "Email",
+                              controller: _emailController,
                               fieldKeyboardType: TextInputType.visiblePassword,
-                              validatorFunction: (value) => !isNRIC(value)
+                              validatorFunction: (value) => !isEmail(value)
                                   ? "Please enter a valid NRIC"
                                   : null,
                             ),
@@ -90,21 +85,27 @@ class _LoginPageState extends State<LoginPage> {
                             FormSpacing(),
                             FormTextField(
                               labelText: "Password",
+                              controller: _passwordController,
                               fieldKeyboardType: TextInputType.visiblePassword,
                               isPassword: true,
-                              validatorFunction: (value) => value.length <= 6
+                              validatorFunction: (value) => value.length < 6
                                   ? "Password must be 6 or more characters in length"
                                   : null,
                             ),
                             FormSpacing(),
                             PrimaryButton(
                               buttonText: 'Login',
-                              btnFunction: () {
+                              btnFunction: () async {
                                 if (_formKey.currentState!.validate()) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                          content: Text('Processing Data')));
-                                  Get.to(() => TaskBarScreen());
+                                  String result = await loginController.login(
+                                      email: _emailController.text,
+                                      password: _passwordController.text);
+                                  if (result == "") {
+                                    Get.to(() => HomePage());
+                                  } else {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(content: Text(result)));
+                                  }
                                 }
                               },
                             ),
