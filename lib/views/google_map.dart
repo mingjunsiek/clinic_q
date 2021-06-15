@@ -210,9 +210,9 @@ class _MapScreenState extends State<MapScreen> {
                 child: FormTextField(
                   labelText: "SEARCH CLINICS",
                   fieldKeyboardType: TextInputType.visiblePassword,
-                  validatorFunction: (value) => !isEmail(value)
-                      ? "Sorry, we do not recognize this email address"
-                      : null,
+                  textFormFieldChanged: (value) {
+                    clinicController.filterClinicList(value);
+                  },
                 ),
               )
             ],

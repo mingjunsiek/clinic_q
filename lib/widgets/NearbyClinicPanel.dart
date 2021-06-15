@@ -16,8 +16,6 @@ class NearbyClinicPanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Clinic> clinicList = clinicController.clinicList;
-
     return Column(
       children: [
         SizedBox(
@@ -32,57 +30,54 @@ class NearbyClinicPanel extends StatelessWidget {
           width: 30.0,
         ),
         Expanded(
-          child: ListView.builder(
-              controller: controller,
-              itemCount: clinicList.length,
-              itemBuilder: (context, index) {
-                return Column(
-                  children: [
-                    Card(
-                      child: ListTile(
-                        onTap: () {},
-                        // leading: Text(
-                        //   'Leading',
-                        //   style: TextStyle(color: Colors.black),
-                        // ),
-                        leading: FittedBox(
-                          fit: BoxFit.contain,
-                          child: Container(
-                            width: displayWidth(context) * 0.6,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  '${clinicList[index].clinicName}',
-                                  style: TextStyle(color: Colors.black),
-                                ),
-                                Text(
-                                  '${clinicList[index].streetName}',
-                                  style: TextStyle(color: kUnselectedColor),
-                                ),
-                              ],
+          child: Obx(
+            () => ListView.builder(
+                controller: controller,
+                itemCount: clinicController.clinicList.length,
+                itemBuilder: (context, index) {
+                  return Column(
+                    children: [
+                      Card(
+                        child: ListTile(
+                          onTap: () {},
+                          leading: FittedBox(
+                            fit: BoxFit.contain,
+                            child: Container(
+                              width: displayWidth(context) * 0.6,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    '${clinicController.clinicList[index].clinicName}',
+                                    style: TextStyle(color: Colors.black),
+                                  ),
+                                  Text(
+                                    '${clinicController.clinicList[index].streetName}',
+                                    style: TextStyle(color: kUnselectedColor),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                        trailing: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(
-                              "Current Queue",
-                              style: TextStyle(color: Colors.black),
-                            ),
-                            Text(
-                              "5/25",
-                              style: TextStyle(color: kUnselectedColor),
-                            ),
-                          ],
+                          trailing: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                "Current Queue",
+                                style: TextStyle(color: Colors.black),
+                              ),
+                              Text(
+                                "5/25",
+                                style: TextStyle(color: kUnselectedColor),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                    // Container(height: displayHeight(context) * 0.01),
-                  ],
-                );
-              }),
+                    ],
+                  );
+                }),
+          ),
         ),
       ],
     );
