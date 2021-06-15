@@ -15,7 +15,13 @@ class ClinicController extends GetxController {
         .get()
         .then((QuerySnapshot querySnapshot) {
       querySnapshot.docs.forEach((doc) {
-        clinicList.add(Clinic.fromMap(doc['clinicInfo']));
+        Clinic clinic = Clinic.fromMap(doc['clinicInfo']);
+        clinic.clinicID = doc.id;
+        clinicList.add(clinic);
+      });
+
+      clinicList.forEach((element) {
+        print(element.toString());
       });
     });
   }

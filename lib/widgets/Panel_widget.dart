@@ -21,57 +21,67 @@ class PanelWidget extends StatelessWidget {
     return Column(
       children: [
         SizedBox(
-          height: 30.0,
+          height: 10.0,
         ),
         Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: kUnselectedColor,
+          ),
           height: 5.0,
           width: 30.0,
-          color: kPrimaryBtnColor,
         ),
         Expanded(
           child: ListView.builder(
               controller: controller,
               itemCount: clinicList.length,
               itemBuilder: (context, index) {
-                return Card(
-                    child: ListTile(
-                  onTap: () {},
-                  // leading: Text(
-                  //   'Leading',
-                  //   style: TextStyle(color: Colors.black),
-                  // ),
-                  leading: FittedBox(
-                    fit: BoxFit.contain,
-                    child: Container(
-                      width: displayWidth(context) * 0.6,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            '${clinicList[index].clinicName}',
-                            style: TextStyle(color: Colors.black),
+                return Column(
+                  children: [
+                    Card(
+                      child: ListTile(
+                        onTap: () {},
+                        // leading: Text(
+                        //   'Leading',
+                        //   style: TextStyle(color: Colors.black),
+                        // ),
+                        leading: FittedBox(
+                          fit: BoxFit.contain,
+                          child: Container(
+                            width: displayWidth(context) * 0.6,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  '${clinicList[index].clinicName}',
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                                Text(
+                                  '${clinicList[index].streetName}',
+                                  style: TextStyle(color: kUnselectedColor),
+                                ),
+                              ],
+                            ),
                           ),
-                          Text(
-                            '${clinicList[index].streetName}',
-                            style: TextStyle(color: kUnselectedColor),
-                          ),
-                        ],
+                        ),
+                        trailing: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              "Current Queue",
+                              style: TextStyle(color: Colors.black),
+                            ),
+                            Text(
+                              "5/25",
+                              style: TextStyle(color: kUnselectedColor),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  trailing: Column(
-                    children: [
-                      Text(
-                        "Current Queue",
-                        style: TextStyle(color: Colors.black),
-                      ),
-                      Text(
-                        "5/25",
-                        style: TextStyle(color: kUnselectedColor),
-                      ),
-                    ],
-                  ),
-                ));
+                    // Container(height: displayHeight(context) * 0.01),
+                  ],
+                );
               }),
         ),
       ],

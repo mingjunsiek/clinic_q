@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 class Clinic {
+  late String clinicID;
   String blkHseNo;
   String buildingName;
   String clinicName;
@@ -30,6 +31,7 @@ class Clinic {
   });
 
   Clinic copyWith({
+    String? clinicID,
     String? blkHseNo,
     String? buildingName,
     String? clinicName,
@@ -61,6 +63,7 @@ class Clinic {
 
   Map<String, dynamic> toMap() {
     return {
+      'clinicID': clinicID,
       'blkHseNo': blkHseNo,
       'buildingName': buildingName,
       'clinicName': clinicName,
@@ -99,7 +102,7 @@ class Clinic {
 
   @override
   String toString() {
-    return 'Clinic(blkHseNo: $blkHseNo, buildingName: $buildingName, clinicName: $clinicName, clinicTelNo: $clinicTelNo, floorNo: $floorNo, lat: $lat, lng: $lng, placeID: $placeID, postalCode: $postalCode, programmeCode: $programmeCode, streetName: $streetName, unitNo: $unitNo)';
+    return 'Clinic(clinicID: $clinicID, blkHseNo: $blkHseNo, buildingName: $buildingName, clinicName: $clinicName, clinicTelNo: $clinicTelNo, floorNo: $floorNo, lat: $lat, lng: $lng, placeID: $placeID, postalCode: $postalCode, programmeCode: $programmeCode, streetName: $streetName, unitNo: $unitNo)';
   }
 
   @override
@@ -107,6 +110,7 @@ class Clinic {
     if (identical(this, other)) return true;
 
     return other is Clinic &&
+        other.clinicID == clinicID &&
         other.blkHseNo == blkHseNo &&
         other.buildingName == buildingName &&
         other.clinicName == clinicName &&
@@ -123,7 +127,8 @@ class Clinic {
 
   @override
   int get hashCode {
-    return blkHseNo.hashCode ^
+    return clinicID.hashCode ^
+        blkHseNo.hashCode ^
         buildingName.hashCode ^
         clinicName.hashCode ^
         clinicTelNo.hashCode ^
