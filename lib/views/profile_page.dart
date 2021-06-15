@@ -1,33 +1,29 @@
-import 'package:clinic_q/controllers/user_controller.dart';
-import 'package:clinic_q/views/login_page.dart';
+import 'package:clinic_q/views/personal_info_page.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:clinic_q/views/profile_page.dart';
 import 'package:clinic_q/views/taskbar.dart';
 
-class SettingPage extends StatefulWidget {
-  const SettingPage({Key? key}) : super(key: key);
+class ProfilePage extends StatefulWidget {
+  const ProfilePage({Key? key}) : super(key: key);
 
   @override
-  _SettingPageState createState() => _SettingPageState();
+  _ProfilePageState createState() => _ProfilePageState();
 }
 
-class _SettingPageState extends State<SettingPage> {
+class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
-    final userController = Get.find<UserController>();
-
     return Container(
       child: SafeArea(
         child: Scaffold(
           appBar: AppBar(
             title: const Text(
-              'Settings',
+              'Profile',
               style:
                   TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
             ),
             backgroundColor: Colors.white,
             centerTitle: true,
+            automaticallyImplyLeading: false,
             bottom: PreferredSize(
                 child: Container(
                   color: Colors.grey,
@@ -35,28 +31,21 @@ class _SettingPageState extends State<SettingPage> {
                 ),
                 preferredSize: Size.fromHeight(1.0)),
           ),
-          // body: _settingsView(),
-          body: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ElevatedButton(
-                  onPressed: () async {
-                    await userController.logout();
-                    Get.offAll(LoginPage());
-                  },
-                  child: Text("Log Out"),
-                ),
-              ],
-            ),
-          ),
+          body: BodyLayout(),
         ),
       ),
     );
   }
 }
 
-Widget _settingsView(BuildContext context) {
+class BodyLayout extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return _profileView(context);
+  }
+}
+
+Widget _profileView(BuildContext context) {
   return ListView(
     children: ListTile.divideTiles(
       context: context,
@@ -65,27 +54,38 @@ Widget _settingsView(BuildContext context) {
           leading: Icon(Icons.person),
           trailing: Icon(Icons.keyboard_arrow_right),
           title: Text(
-            'Profile',
+            'Person Information',
             style: TextStyle(color: Colors.black),
           ),
           onTap: () {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => ProfilePage(),
+                builder: (context) => PersonalInfoPage(),
               ),
             );
           },
         ),
         ListTile(
-          leading: Icon(Icons.logout),
+          leading: Icon(Icons.home_filled),
           trailing: Icon(Icons.keyboard_arrow_right),
           title: Text(
-            'Logout',
+            'Address',
             style: TextStyle(color: Colors.black),
           ),
           onTap: () {
-            print('Logout');
+            print('Address');
+          },
+        ),
+        ListTile(
+          leading: Icon(Icons.sick),
+          trailing: Icon(Icons.keyboard_arrow_right),
+          title: Text(
+            'Allergies',
+            style: TextStyle(color: Colors.black),
+          ),
+          onTap: () {
+            print('Allergies');
           },
         ),
       ],
