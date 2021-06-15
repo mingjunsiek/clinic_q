@@ -1,10 +1,8 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:location/location.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:clinic_q/utils/size_helpers.dart';
 import 'package:clinic_q/utils/constants.dart';
 import 'package:clinic_q/widgets/FormTextField.dart';
 import 'package:clinic_q/widgets/Panel_widget.dart';
@@ -31,7 +29,6 @@ class _MapScreenState extends State<MapScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     checkForLocationPermission();
     fabHeight.value = initFabHeight;
     super.initState();
