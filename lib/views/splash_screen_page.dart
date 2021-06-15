@@ -1,4 +1,5 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
+import 'package:clinic_q/controllers/clinic_controller.dart';
 import 'package:clinic_q/controllers/user_controller.dart';
 import 'package:clinic_q/views/login_page.dart';
 import 'package:clinic_q/views/taskbar.dart';
@@ -10,6 +11,7 @@ import '../utils/size_helpers.dart';
 
 class SplashScreenPage extends StatelessWidget {
   final userController = Get.put(UserController());
+  final clinicController = Get.put(ClinicController());
 
   @override
   Widget build(BuildContext context) {
@@ -17,8 +19,8 @@ class SplashScreenPage extends StatelessWidget {
       splash: './assets/images/Login_Background.jpg',
       splashTransition: SplashTransition.slideTransition,
       pageTransitionType: PageTransitionType.fade,
-      duration: 2000,
       screenFunction: () async {
+        clinicController.getClinicList();
         bool isLoggedIn = userController.isLogin();
         // SharedPreferences prefs = await SharedPreferences.getInstance();
         // await permissionController.checkPermissionStatus();

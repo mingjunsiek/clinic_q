@@ -35,59 +35,43 @@ class _SettingPageState extends State<SettingPage> {
                 preferredSize: Size.fromHeight(1.0)),
           ),
           // body: _settingsView(),
-          body: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ElevatedButton(
-                  onPressed: () async {
+          body: ListView(
+            children: ListTile.divideTiles(
+              context: context,
+              tiles: [
+                ListTile(
+                  leading: Icon(Icons.person),
+                  trailing: Icon(Icons.keyboard_arrow_right),
+                  title: Text(
+                    'Profile',
+                    style: TextStyle(color: Colors.black),
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ProfilePage(),
+                      ),
+                    );
+                  },
+                ),
+                ListTile(
+                  leading: Icon(Icons.logout),
+                  trailing: Icon(Icons.keyboard_arrow_right),
+                  title: Text(
+                    'Logout',
+                    style: TextStyle(color: Colors.black),
+                  ),
+                  onTap: () async {
                     await userController.logout();
                     Get.offAll(LoginPage());
                   },
-                  child: Text("Log Out"),
                 ),
               ],
-            ),
+            ).toList(),
           ),
         ),
       ),
     );
   }
-}
-
-Widget _settingsView(BuildContext context) {
-  return ListView(
-    children: ListTile.divideTiles(
-      context: context,
-      tiles: [
-        ListTile(
-          leading: Icon(Icons.person),
-          trailing: Icon(Icons.keyboard_arrow_right),
-          title: Text(
-            'Profile',
-            style: TextStyle(color: Colors.black),
-          ),
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => ProfilePage(),
-              ),
-            );
-          },
-        ),
-        ListTile(
-          leading: Icon(Icons.logout),
-          trailing: Icon(Icons.keyboard_arrow_right),
-          title: Text(
-            'Logout',
-            style: TextStyle(color: Colors.black),
-          ),
-          onTap: () {
-            print('Logout');
-          },
-        ),
-      ],
-    ).toList(),
-  );
 }

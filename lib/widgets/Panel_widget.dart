@@ -1,17 +1,22 @@
+import 'package:clinic_q/controllers/clinic_controller.dart';
+import 'package:clinic_q/model/clinic.dart';
+import 'package:clinic_q/utils/size_helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:clinic_q/utils/constants.dart';
+import 'package:get/get.dart';
 
 class PanelWidget extends StatelessWidget {
   final ScrollController controller;
+  final clinicController = Get.find<ClinicController>();
 
-  const PanelWidget({
+  PanelWidget({
     Key? key,
     required this.controller,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final items = List<String>.generate(10, (i) => "Item $i");
+    List<Clinic> clinicList = clinicController.clinicList;
 
     return Column(
       children: [
@@ -26,14 +31,45 @@ class PanelWidget extends StatelessWidget {
         Expanded(
           child: ListView.builder(
               controller: controller,
-              itemCount: items.length,
+              itemCount: clinicList.length,
               itemBuilder: (context, index) {
                 return Card(
                     child: ListTile(
                   onTap: () {},
-                  title: Text(
-                    '${items[index]}',
-                    style: TextStyle(color: Colors.black),
+                  // leading: Text(
+                  //   'Leading',
+                  //   style: TextStyle(color: Colors.black),
+                  // ),
+                  leading: FittedBox(
+                    fit: BoxFit.contain,
+                    child: Container(
+                      width: displayWidth(context) * 0.6,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            '${clinicList[index].clinicName}',
+                            style: TextStyle(color: Colors.black),
+                          ),
+                          Text(
+                            '${clinicList[index].streetName}',
+                            style: TextStyle(color: kUnselectedColor),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  trailing: Column(
+                    children: [
+                      Text(
+                        "Current Queue",
+                        style: TextStyle(color: Colors.black),
+                      ),
+                      Text(
+                        "5/25",
+                        style: TextStyle(color: kUnselectedColor),
+                      ),
+                    ],
                   ),
                 ));
               }),

@@ -24,8 +24,10 @@ class _MapScreenState extends State<MapScreen> {
   final panelHeightOpen = 0.0.obs;
   final panelHeightClosed = 100.0.obs;
 
-  LatLng _initialCameraPosition =
-      LatLng(1.3538107695634425, 103.85797370238132);
+  LatLng _initialCameraPosition = LatLng(
+    1.4406406419432831,
+    103.7805755743861,
+  );
 
   @override
   void initState() {
@@ -133,58 +135,65 @@ class _MapScreenState extends State<MapScreen> {
     panelHeightOpen.value = MediaQuery.of(context).size.height - 300;
 
     return Material(
-      child: Stack(
-        alignment: Alignment.topCenter,
-        children: <Widget>[
-          SlidingUpPanel(
-            maxHeight: panelHeightOpen(),
-            minHeight: panelHeightClosed(),
-            parallaxEnabled: true,
-            parallaxOffset: 0.5,
-            panelBuilder: (ScrollController sc) => PanelWidget(controller: sc),
-            body: Center(
-              child: _googleMap(),
-            ),
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(24.0),
-              topRight: Radius.circular(24.0),
-            ),
-            onPanelSlide: (double pos) => fabHeight.value =
-                pos * (panelHeightOpen() - panelHeightClosed()) + initFabHeight,
-          ),
-          Positioned(
-            right: 20.0,
-            bottom: fabHeight(),
-            child: FloatingActionButton(
-              child: Icon(
-                Icons.gps_fixed,
-                color: kPrimaryBtnColor,
+      child: SafeArea(
+        child: Scaffold(
+          body: Stack(
+            alignment: Alignment.topCenter,
+            children: <Widget>[
+              SlidingUpPanel(
+                maxHeight: panelHeightOpen(),
+                minHeight: panelHeightClosed(),
+                parallaxEnabled: true,
+                parallaxOffset: 0.5,
+                panelBuilder: (ScrollController sc) => PanelWidget(
+                  controller: sc,
+                ),
+                body: Center(
+                  child: _googleMap(),
+                ),
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(24.0),
+                  topRight: Radius.circular(24.0),
+                ),
+                onPanelSlide: (double pos) => fabHeight.value =
+                    pos * (panelHeightOpen() - panelHeightClosed()) +
+                        initFabHeight,
               ),
-              onPressed: () {
-                _googleMapController.animateCamera(
-                    CameraUpdate.newCameraPosition(CameraPosition(
-                  target: _initialCameraPosition,
-                  zoom: 16,
-                )));
-              },
-              backgroundColor: Colors.white,
-            ),
+              Positioned(
+                right: 20.0,
+                bottom: fabHeight(),
+                child: FloatingActionButton(
+                  child: Icon(
+                    Icons.gps_fixed,
+                    color: kPrimaryBtnColor,
+                  ),
+                  onPressed: () {
+                    _googleMapController.animateCamera(
+                        CameraUpdate.newCameraPosition(CameraPosition(
+                      target: _initialCameraPosition,
+                      zoom: 16,
+                    )));
+                  },
+                  backgroundColor: Colors.white,
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.only(
+                  top: defaultPadding,
+                  left: defaultPadding,
+                  right: defaultPadding,
+                ),
+                child: FormTextField(
+                  labelText: "SEARCH CLINICS",
+                  fieldKeyboardType: TextInputType.visiblePassword,
+                  validatorFunction: (value) => !isEmail(value)
+                      ? "Sorry, we do not recognize this email address"
+                      : null,
+                ),
+              )
+            ],
           ),
-          Container(
-            padding: EdgeInsets.only(
-              top: 70.0,
-              left: defaultPadding,
-              right: defaultPadding,
-            ),
-            child: FormTextField(
-              labelText: "SEARCH CLINICS",
-              fieldKeyboardType: TextInputType.visiblePassword,
-              validatorFunction: (value) => !isEmail(value)
-                  ? "Sorry, we do not recognize this email address"
-                  : null,
-            ),
-          )
-        ],
+        ),
       ),
     );
   }
