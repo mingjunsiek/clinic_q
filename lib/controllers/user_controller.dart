@@ -1,5 +1,6 @@
 import 'package:clinic_q/controllers/flutter_fire_controller.dart';
 import 'package:clinic_q/model/user.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
 class UserController extends GetxController {
@@ -9,7 +10,7 @@ class UserController extends GetxController {
 
   bool isLogin() {
     if (flutterFireController.auth.currentUser != null) {
-      print(flutterFireController.auth.currentUser);
+      print("Current User: ${flutterFireController.auth.currentUser}");
       return true;
     } else
       return false;
@@ -34,6 +35,17 @@ class UserController extends GetxController {
       allergies: allergies,
     );
     print(user.toString());
+  }
+
+  void getUserInfo() async {
+    String? userId = flutterFireController.auth.currentUser?.uid;
+    await flutterFireController.firestore
+        .collection('users')
+        .doc(userId)
+        .get()
+        .then((DocumentSnapshot documentSnapshot) {
+      print("User Info: ${documentSnapshot.data()}");
+    });
   }
 
   Future<void> logout() async {

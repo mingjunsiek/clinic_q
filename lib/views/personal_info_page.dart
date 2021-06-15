@@ -1,3 +1,4 @@
+import 'package:clinic_q/views/profile_page.dart';
 import 'package:clinic_q/widgets/FormSpacing.dart';
 import 'package:flutter/material.dart';
 
@@ -105,10 +106,10 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
                             ),
                             onPressed: () {
                               if (_formEditKey.currentState!.validate()) {
-                                print("Edit");
+                                print("Confirm");
                               }
                             },
-                            child: Text('Edit'),
+                            child: Text('Confirm'),
                           ),
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(
@@ -117,9 +118,12 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
                                   borderRadius: BorderRadius.circular(12)),
                             ),
                             onPressed: () {
-                              if (_formEditKey.currentState!.validate()) {
-                                print("Cancel");
-                              }
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ProfilePage(),
+                                ),
+                              );
                             },
                             child: Text('Cancel'),
                           )

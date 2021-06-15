@@ -12,50 +12,45 @@ class SettingPage extends StatefulWidget {
 }
 
 class _SettingPageState extends State<SettingPage> {
+  final userController = Get.find<UserController>();
   @override
   Widget build(BuildContext context) {
-    final userController = Get.find<UserController>();
+    userController.getUserInfo();
 
     return Container(
       child: SafeArea(
         child: Scaffold(
-          appBar: AppBar(
-            title: const Text(
-              'Settings',
-              style:
-                  TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+            appBar: AppBar(
+              title: const Text(
+                'Settings',
+                style:
+                    TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+              ),
+              backgroundColor: Colors.white,
+              centerTitle: true,
+              bottom: PreferredSize(
+                  child: Container(
+                    color: Colors.grey,
+                    height: 1.0,
+                  ),
+                  preferredSize: Size.fromHeight(1.0)),
             ),
-            backgroundColor: Colors.white,
-            centerTitle: true,
-            bottom: PreferredSize(
-                child: Container(
-                  color: Colors.grey,
-                  height: 1.0,
-                ),
-                preferredSize: Size.fromHeight(1.0)),
-          ),
-          // body: _settingsView(),
-          body: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ElevatedButton(
-                  onPressed: () async {
-                    await userController.logout();
-                    Get.offAll(LoginPage());
-                  },
-                  child: Text("Log Out"),
-                ),
-              ],
-            ),
-          ),
-        ),
+            // body: _settingsView(),
+            body: SettingsView()),
       ),
     );
   }
 }
 
+class SettingsView extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return _settingsView(context);
+  }
+}
+
 Widget _settingsView(BuildContext context) {
+  final userController = Get.find<UserController>();
   return ListView(
     children: ListTile.divideTiles(
       context: context,
@@ -83,8 +78,9 @@ Widget _settingsView(BuildContext context) {
             'Logout',
             style: TextStyle(color: Colors.black),
           ),
-          onTap: () {
-            print('Logout');
+          onTap: () async {
+            await userController.logout();
+            Get.offAll(LoginPage());
           },
         ),
       ],
