@@ -15,17 +15,14 @@ class TaskBarScreen extends StatefulWidget {
 
 class _TaskBarScreenState extends State<TaskBarScreen> {
   // int pageIndex = 0;
-  List<Widget> pageList = <Widget>[
-    MapScreen(),
-    SettingPage(),
-    ProfilePage(),
-  ];
+
   final taskbarController = Get.put(TaskbarController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Obx(() => pageList[taskbarController.pageWidgetIndex.value]),
+      body: Obx(() => taskbarController
+          .widgetList[taskbarController.pageWidgetIndex.value]),
       bottomNavigationBar: Obx(() => BottomNavigationBar(
             currentIndex: taskbarController.currentIndex.value,
             onTap: (value) {
