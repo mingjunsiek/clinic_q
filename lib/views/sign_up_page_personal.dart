@@ -137,11 +137,13 @@ class _SignUpPagePersonalState extends State<SignUpPagePersonal> {
                               btnFunction: () {
                                 if (_formKey.currentState!.validate()) {
                                   signUpController.setPersonal(
-                                    ic: _nricController.text,
-                                    fName: _firstNameController.text,
-                                    lName: _lastNameController.text,
-                                    phone: _phoneController.text,
-                                    date: currentDate,
+                                    inputNRIC: _nricController.text.trim(),
+                                    inputFirstName:
+                                        _firstNameController.text.trim(),
+                                    inputLastName:
+                                        _lastNameController.text.trim(),
+                                    inputPhone: _phoneController.text.trim(),
+                                    inputDate: currentDate,
                                   );
                                   print(_nricController.text);
                                   Get.to(() => SignUpPageAllergies());

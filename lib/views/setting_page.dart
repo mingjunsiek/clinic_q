@@ -3,7 +3,6 @@ import 'package:clinic_q/views/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:clinic_q/views/profile_page.dart';
-import 'package:clinic_q/views/taskbar.dart';
 
 class SettingPage extends StatefulWidget {
   const SettingPage({Key? key}) : super(key: key);

@@ -68,8 +68,8 @@ class _SignUpPageAllergiesState extends State<SignUpPageAllergies> {
                             PrimaryButton(
                                 buttonText: 'Next',
                                 btnFunction: () {
-                                  signUpController
-                                      .setAllergies(_allergiesController.text);
+                                  signUpController.setAllergies(
+                                      _allergiesController.text.trim());
                                   Get.to(() => SignUpPageAccount());
                                 }),
                             // Spacer(),

@@ -119,8 +119,9 @@ class _SignUpPageAccountState extends State<SignUpPageAccount> {
                                   if (_formKey.currentState!.validate()) {
                                     String result =
                                         await signUpController.createAccount(
-                                      email: _emailController.text,
-                                      password: _passwordController.text,
+                                      inputEmail: _emailController.text.trim(),
+                                      inputPassword:
+                                          _passwordController.text.trim(),
                                     );
                                     if (result == "") {
                                       Get.to(() => HomePage());

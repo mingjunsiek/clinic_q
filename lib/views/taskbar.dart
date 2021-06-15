@@ -1,4 +1,3 @@
-import 'package:clinic_q/views/home_page.dart';
 import 'package:clinic_q/views/google_map.dart';
 import 'package:clinic_q/views/setting_page.dart';
 import 'package:clinic_q/utils/constants.dart';

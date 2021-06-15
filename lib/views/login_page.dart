@@ -98,8 +98,9 @@ class _LoginPageState extends State<LoginPage> {
                               btnFunction: () async {
                                 if (_formKey.currentState!.validate()) {
                                   String result = await loginController.login(
-                                      email: _emailController.text,
-                                      password: _passwordController.text);
+                                      email: _emailController.text.trim(),
+                                      password:
+                                          _passwordController.text.trim());
                                   if (result == "") {
                                     Get.to(() => HomePage());
                                   } else {
