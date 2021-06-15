@@ -1,4 +1,5 @@
 import 'package:clinic_q/controllers/clinic_controller.dart';
+import 'package:clinic_q/widgets/ConfirmationPanel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
@@ -6,7 +7,7 @@ import 'package:location/location.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:clinic_q/utils/constants.dart';
 import 'package:clinic_q/widgets/FormTextField.dart';
-import 'package:clinic_q/widgets/Panel_widget.dart';
+import 'package:clinic_q/widgets/NearbyClinicPanel.dart';
 
 class MapScreen extends StatefulWidget {
   @override
@@ -26,9 +27,12 @@ class _MapScreenState extends State<MapScreen> {
   final panelHeightOpen = 0.0.obs;
   final panelHeightClosed = 100.0.obs;
 
+  //if user booked an appointment
+  final isBookedAppt = false.obs;
+
   LatLng _initialCameraPosition = LatLng(
-    1.4406406419432831,
-    103.7805755743861,
+    1.3538107695634425,
+    103.85797370238132,
   );
 
   @override
@@ -160,9 +164,9 @@ class _MapScreenState extends State<MapScreen> {
                 minHeight: panelHeightClosed(),
                 parallaxEnabled: true,
                 parallaxOffset: 0.5,
-                panelBuilder: (ScrollController sc) => PanelWidget(
-                  controller: sc,
-                ),
+                panelBuilder: (ScrollController sc) => isBookedAppt()
+                    ? ConfirmationPanel(controller: sc)
+                    : NearbyClinicPanel(controller: sc),
                 body: Center(
                   child: _googleMap(),
                 ),
