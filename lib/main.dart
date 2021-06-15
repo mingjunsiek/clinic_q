@@ -1,5 +1,6 @@
 import 'package:clinic_q/utils/constants.dart';
 import 'package:clinic_q/views/login_page.dart';
+import 'package:clinic_q/views/setting_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
