@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:clinic_q/utils/constants.dart';
 
-class PanelWidget extends StatelessWidget {
+class NearbyClinicPanel extends StatelessWidget {
   final ScrollController controller;
 
-  const PanelWidget({
+  const NearbyClinicPanel({
     Key? key,
     required this.controller,
   }) : super(key: key);

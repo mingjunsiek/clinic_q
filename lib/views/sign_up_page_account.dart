@@ -2,6 +2,7 @@ import 'package:clinic_q/controllers/signup_controller.dart';
 import 'package:clinic_q/utils/constants.dart';
 import 'package:clinic_q/utils/size_helpers.dart';
 import 'package:clinic_q/views/home_page.dart';
+import 'package:clinic_q/views/taskbar.dart';
 import 'package:clinic_q/widgets/FormSpacing.dart';
 import 'package:clinic_q/widgets/FormTextField.dart';
 import 'package:clinic_q/widgets/PrimaryButton.dart';
@@ -124,7 +125,7 @@ class _SignUpPageAccountState extends State<SignUpPageAccount> {
                                           _passwordController.text.trim(),
                                     );
                                     if (result == "") {
-                                      Get.to(() => HomePage());
+                                      Get.to(() => TaskBarScreen());
                                     } else {
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(
