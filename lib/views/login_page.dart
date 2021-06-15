@@ -4,6 +4,7 @@ import 'package:clinic_q/views/sign_up_page_personal.dart';
 import 'package:clinic_q/views/taskbar.dart';
 import 'package:clinic_q/widgets/FormSpacing.dart';
 import 'package:clinic_q/widgets/FormTextField.dart';
+import 'package:clinic_q/widgets/PrimaryButton.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -59,13 +60,14 @@ class _LoginPageState extends State<LoginPage> {
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Colors.black,
-                        fontSize: 25,
+                        fontSize: 20,
                       )),
+                  FormSpacing(),
                   Text('ClinicQ',
                       style: TextStyle(
                         fontWeight: FontWeight.w700,
                         color: Colors.black,
-                        fontSize: 30,
+                        fontSize: 25,
                       )),
                   Expanded(
                     child: SingleChildScrollView(
@@ -81,7 +83,7 @@ class _LoginPageState extends State<LoginPage> {
                               labelText: "NRIC",
                               fieldKeyboardType: TextInputType.visiblePassword,
                               validatorFunction: (value) => !isNRIC(value)
-                                  ? "Sorry, we do not recognize this NRIC"
+                                  ? "Please enter a valid NRIC"
                                   : null,
                             ),
 
@@ -95,29 +97,16 @@ class _LoginPageState extends State<LoginPage> {
                                   : null,
                             ),
                             FormSpacing(),
-                            SizedBox(
-                              width: double.infinity,
-                              child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  primary: Color(0xFFC08E5F),
-                                ),
-                                onPressed: () {
+                            PrimaryButton(
+                              buttonText: 'Login',
+                              btnFunction: () {
+                                if (_formKey.currentState!.validate()) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                          content: Text('Processing Data')));
                                   Get.to(() => TaskBarScreen());
-                                  // if (_formKey.currentState!.validate()) {
-                                  //   ScaffoldMessenger.of(context).showSnackBar(
-                                  //       SnackBar(
-                                  //           content: Text('Processing Data')));
-                                  //   Get.to(HomePage());
-                                  // }
-                                },
-                                child: Text(
-                                  'Login',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 20,
-                                  ),
-                                ),
-                              ),
+                                }
+                              },
                             ),
                             // Spacer(),
                             TextButton(

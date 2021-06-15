@@ -9,6 +9,7 @@ class FormTextField extends StatelessWidget {
     this.validatorFunction,
     this.controller,
     this.fieldKeyboardType,
+    this.maxLine = 1,
   }) : super(key: key);
 
   final labelText;
@@ -16,6 +17,7 @@ class FormTextField extends StatelessWidget {
   final validatorFunction;
   final controller;
   final fieldKeyboardType;
+  final maxLine;
 
   @override
   Widget build(BuildContext context) {
@@ -50,6 +52,7 @@ class FormTextField extends StatelessWidget {
         validator: validatorFunction,
         obscureText: isPassword ? true : false,
         style: TextStyle(color: Colors.black),
+        maxLines: maxLine,
         decoration: InputDecoration(
           border: customInputBorder,
           focusedBorder: customInputBorder,
@@ -60,7 +63,7 @@ class FormTextField extends StatelessWidget {
           labelStyle: TextStyle(
             color: kTextFieldColor,
             fontWeight: FontWeight.bold,
-            fontSize: 20,
+            fontSize: 15,
           ),
           labelText: labelText,
         ),
