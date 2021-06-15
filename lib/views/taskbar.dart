@@ -1,4 +1,5 @@
 import 'package:clinic_q/views/google_map.dart';
+import 'package:clinic_q/views/profile_page.dart';
 import 'package:clinic_q/views/setting_page.dart';
 import 'package:clinic_q/utils/constants.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,7 @@ class _TaskBarScreenState extends State<TaskBarScreen> {
   List<Widget> pageList = <Widget>[
     MapScreen(),
     SettingPage(),
+    ProfilePage(),
   ];
   @override
   Widget build(BuildContext context) {
