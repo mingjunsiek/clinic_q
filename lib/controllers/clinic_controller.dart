@@ -20,9 +20,9 @@ class ClinicController extends GetxController {
         clinicList.add(clinic);
       });
 
-      clinicList.forEach((element) {
-        print(element.toString());
-      });
+      // clinicList.forEach((element) {
+      //   print(element.toString());
+      // });
     });
   }
 }

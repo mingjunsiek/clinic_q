@@ -1,5 +1,6 @@
 import 'package:clinic_q/views/personal_info_page.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -57,12 +58,7 @@ Widget _profileView(BuildContext context) {
             style: TextStyle(color: Colors.black),
           ),
           onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => PersonalInfoPage(),
-              ),
-            );
+            Get.to(PersonalInfoPage());
           },
         ),
         ListTile(

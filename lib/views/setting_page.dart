@@ -1,4 +1,6 @@
+import 'package:clinic_q/controllers/taskbar_controller.dart';
 import 'package:clinic_q/controllers/user_controller.dart';
+import 'package:clinic_q/utils/constants.dart';
 import 'package:clinic_q/views/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,6 +15,7 @@ class SettingPage extends StatefulWidget {
 
 class _SettingPageState extends State<SettingPage> {
   final userController = Get.find<UserController>();
+  final taskbarController = Get.find<TaskbarController>();
   @override
   Widget build(BuildContext context) {
     userController.getUserInfo();
@@ -51,6 +54,7 @@ class SettingsView extends StatelessWidget {
 
 Widget _settingsView(BuildContext context) {
   final userController = Get.find<UserController>();
+  final taskbarController = Get.find<TaskbarController>();
   return ListView(
     children: ListTile.divideTiles(
       context: context,
@@ -63,12 +67,7 @@ Widget _settingsView(BuildContext context) {
             style: TextStyle(color: Colors.black),
           ),
           onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => ProfilePage(),
-              ),
-            );
+            taskbarController.updatePageIndex(2);
           },
         ),
         ListTile(

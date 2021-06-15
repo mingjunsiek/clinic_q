@@ -19,6 +19,8 @@ const defaultPadding = 15.00;
 
 const loginBackgroundImg = 'assets/images/Login_Background.jpg';
 
+const profile_page_index = 2;
+
 bool isEmail(String value) {
   String regex =
       r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
