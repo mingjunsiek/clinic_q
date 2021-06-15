@@ -12,8 +12,11 @@ class SettingPage extends StatefulWidget {
 }
 
 class _SettingPageState extends State<SettingPage> {
+  final userController = Get.find<UserController>();
   @override
   Widget build(BuildContext context) {
+    userController.getUserInfo();
+
     return Container(
       child: SafeArea(
         child: Scaffold(
