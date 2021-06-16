@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:clinic_q/widgets/GoogleMapWidget.dart';
 import 'package:clinic_q/widgets/OverviewCard.dart';
 import 'package:get/get.dart';
+import 'package:map_launcher/map_launcher.dart';
 
 class ClinicInfoPage extends StatefulWidget {
   final clinicID;
@@ -54,8 +55,8 @@ class _ClinicInfoPageState extends State<ClinicInfoPage> {
                   child: Container(
                     child: GoogleMapWidget(
                       clinicId: clinic.clinicID,
-                      clinicName: clinic.clinicName,
-                      streetName: clinic.streetName,
+                      clinicName: clinic.clinicName.toString(),
+                      streetName: clinic.streetName.toString(),
                       lat: clinic.lat,
                       lng: clinic.lng,
                     ),
@@ -79,12 +80,19 @@ class _ClinicInfoPageState extends State<ClinicInfoPage> {
                 OverviewCard({
                   'Contact': clinic.clinicTelNo,
                   'Address':
-                      '${clinic.blkHseNo} ${clinic.streetName} #${clinic.floorNo}-${clinic.unitNo} S(${clinic.postalCode})',
-                  'Clinic': clinic.clinicName,
+                      'Block ${clinic.blkHseNo} ${clinic.streetName}, ${clinic.floorNo}-${clinic.unitNo}\nSingapore ${clinic.postalCode}'
+                          .toUpperCase(),
                 }),
                 FormSpacing(),
                 PrimaryButton(
-                  btnFunction: () {},
+                  btnFunction: () async {
+                    final availableMaps = await MapLauncher.installedMaps;
+                    print(
+                        availableMaps); // [AvailableMap { mapName: Google Maps, mapType: google }, ...]
+                    await availableMaps.first.showDirections(
+                        destination: Coords(clinic.lat, clinic.lng),
+                        destinationTitle: clinic.clinicName);
+                  },
                   buttonText: "Directions",
                   color: kDirectionBtnColor,
                 ),
