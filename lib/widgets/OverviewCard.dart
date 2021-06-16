@@ -19,7 +19,7 @@ class OverviewCard extends StatelessWidget {
             Expanded(
               flex: 2,
               child: Text(
-                '${key}:',
+                '$key:',
                 textAlign: TextAlign.start,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
@@ -31,7 +31,7 @@ class OverviewCard extends StatelessWidget {
             Expanded(
               flex: 3,
               child: Text(
-                '${value}',
+                value,
                 textAlign: TextAlign.start,
                 style: TextStyle(
                   color: Colors.black,

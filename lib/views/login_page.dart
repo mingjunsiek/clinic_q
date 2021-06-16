@@ -3,7 +3,6 @@ import 'package:clinic_q/utils/constants.dart';
 import 'package:clinic_q/utils/size_helpers.dart';
 import 'package:clinic_q/views/taskbar.dart';
 import 'package:clinic_q/views/sign_up_page_personal.dart';
-import 'package:clinic_q/views/taskbar.dart';
 import 'package:clinic_q/widgets/FormSpacing.dart';
 import 'package:clinic_q/widgets/FormTextField.dart';
 import 'package:clinic_q/widgets/PrimaryButton.dart';

@@ -16,7 +16,7 @@ class SplashScreenPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedSplashScreen.withScreenFunction(
-      splash: './assets/images/Login_Background.jpg',
+      splash: './assets/images/splash.jpg',
       splashTransition: SplashTransition.slideTransition,
       pageTransitionType: PageTransitionType.fade,
       screenFunction: () async {
@@ -39,7 +39,7 @@ class SplashScreenPage extends StatelessWidget {
           return LoginPage();
         }
       },
-      splashIconSize: displayWidth(context),
+      splashIconSize: displayWidth(context) * 0.7,
     );
   }
 }

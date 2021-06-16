@@ -43,3 +43,9 @@ bool isPhoneNum(String value) {
 
   return value.isNotEmpty && regExp.hasMatch(value);
 }
+
+enum Navigation {
+  mapEnum,
+  settingEnum,
+  profileEnum,
+}

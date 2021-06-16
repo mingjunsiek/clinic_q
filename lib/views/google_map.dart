@@ -208,7 +208,7 @@ class _MapScreenState extends State<MapScreen> {
                   right: defaultPadding,
                 ),
                 child: FormTextField(
-                  labelText: "SEARCH CLINICS",
+                  labelText: "Search Clinic",
                   fieldKeyboardType: TextInputType.visiblePassword,
                   textFormFieldChanged: (value) {
                     clinicController.filterClinicList(value);

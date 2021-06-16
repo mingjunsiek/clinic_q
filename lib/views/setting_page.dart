@@ -4,7 +4,6 @@ import 'package:clinic_q/utils/constants.dart';
 import 'package:clinic_q/views/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:clinic_q/views/profile_page.dart';
 
 class SettingPage extends StatefulWidget {
   const SettingPage({Key? key}) : super(key: key);
@@ -67,7 +66,7 @@ Widget _settingsView(BuildContext context) {
             style: TextStyle(color: Colors.black),
           ),
           onTap: () {
-            taskbarController.updatePageIndex(2);
+            taskbarController.updatePageIndex(Navigation.profileEnum.index);
           },
         ),
         ListTile(

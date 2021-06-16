@@ -1,3 +1,4 @@
+import 'package:clinic_q/views/clinic_info_page.dart';
 import 'package:clinic_q/views/google_map.dart';
 import 'package:clinic_q/views/profile_page.dart';
 import 'package:clinic_q/views/setting_page.dart';
@@ -12,7 +13,7 @@ class TaskbarController extends GetxController {
     MapScreen(),
     SettingPage(),
     ProfilePage(),
-  ];
+  ].obs;
 
   Map<int, int> pageList = {
     0: 0,
@@ -23,5 +24,9 @@ class TaskbarController extends GetxController {
   void updatePageIndex(int updatedIndex) {
     currentIndex.value = pageList[updatedIndex]!;
     pageWidgetIndex.value = updatedIndex;
+  }
+
+  void updateToClinicInfo(String clinicID) {
+    widgetList[0] = ClinicInfoPage();
   }
 }
