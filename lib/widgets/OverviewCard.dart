@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:clinic_q/utils/constants.dart';
 
 class OverviewCard extends StatelessWidget {
-  var overviewInformation = new Map<String, dynamic>();
+  const OverviewCard(this.overviewInformation);
 
-  OverviewCard(this.overviewInformation);
+  final overviewInformation;
 
   List<Widget> getInformations() {
     List<Widget> widgetList = [];
@@ -32,7 +32,7 @@ class OverviewCard extends StatelessWidget {
               flex: 3,
               child: Text(
                 value,
-                textAlign: TextAlign.start,
+                textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 18.0,
@@ -48,12 +48,9 @@ class OverviewCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(defaultPadding),
-      child: Card(
-        child: Column(
-          children: getInformations(),
-        ),
+    return Card(
+      child: Column(
+        children: getInformations(),
       ),
     );
   }
