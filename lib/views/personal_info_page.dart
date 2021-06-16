@@ -90,6 +90,7 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
                                         controller: _nricController,
                                         //initialValue: curr.data!.nric,
                                         decoration: InputDecoration(
+                                            labelText: 'NRIC',
                                             hintText: curr.data!.nric),
                                         textAlign: TextAlign.left,
                                         style: TextStyle(color: Colors.black),
@@ -105,6 +106,7 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
                                         controller: _firstNameController,
                                         //initialValue: curr.data?.firstName,
                                         decoration: InputDecoration(
+                                          labelText: 'First Name',
                                           hintText: curr.data?.firstName,
                                         ),
                                         textAlign: TextAlign.left,
@@ -121,6 +123,7 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
                                         controller: _lastNameController,
                                         //initialValue: curr.data?.lastName,
                                         decoration: InputDecoration(
+                                          labelText: 'Last Name',
                                           hintText: curr.data?.lastName,
                                         ),
                                         textAlign: TextAlign.left,
@@ -137,6 +140,7 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
                                         controller: _phoneController,
                                         //initialValue: curr.data?.phone,
                                         decoration: InputDecoration(
+                                          labelText: 'Phone No.',
                                           hintText: curr.data?.phone,
                                         ),
                                         textAlign: TextAlign.left,
