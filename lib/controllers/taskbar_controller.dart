@@ -1,5 +1,5 @@
 import 'package:clinic_q/views/clinic_info_page.dart';
-import 'package:clinic_q/views/google_map.dart';
+import 'package:clinic_q/views/mapscreen_page.dart';
 import 'package:clinic_q/views/profile_page.dart';
 import 'package:clinic_q/views/setting_page.dart';
 import 'package:flutter/material.dart';
