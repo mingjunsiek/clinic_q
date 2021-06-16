@@ -115,6 +115,7 @@ class _SignUpPageAccountState extends State<SignUpPageAccount> {
                             children: [
                               PrimaryButton(
                                 buttonText: 'Sign Up',
+                                color: kPrimaryBtnColor,
                                 btnFunction: () async {
                                   if (_formKey.currentState!.validate()) {
                                     String result =

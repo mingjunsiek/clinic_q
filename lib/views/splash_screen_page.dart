@@ -10,7 +10,7 @@ import 'package:page_transition/page_transition.dart';
 import '../utils/size_helpers.dart';
 
 class SplashScreenPage extends StatelessWidget {
-  final userController = Get.put(UserController());
+  final userController = Get.find<UserController>();
   final clinicController = Get.put(ClinicController());
 
   @override
@@ -22,18 +22,9 @@ class SplashScreenPage extends StatelessWidget {
       screenFunction: () async {
         clinicController.getClinicList();
         bool isLoggedIn = userController.isLogin();
-        // SharedPreferences prefs = await SharedPreferences.getInstance();
-        // await permissionController.checkPermissionStatus();
-        // if (permissionController.locationPermissionGranted.value == false ||
-        //     permissionController.bluetoothStatus.value == false)
-        //   return PermissionPage();
-        // else {
-        //   if (prefs.getBool('initial') == true)
-        //     return SelectionPage();
-        //   else
-        //     return OnboardingPage();
-        // }
+
         if (isLoggedIn) {
+          await userController.getCurrentAppt();
           return TaskBarScreen();
         } else {
           return LoginPage();

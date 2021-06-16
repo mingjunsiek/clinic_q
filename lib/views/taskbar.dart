@@ -14,7 +14,7 @@ class TaskBarScreen extends StatefulWidget {
 class _TaskBarScreenState extends State<TaskBarScreen> {
   // int pageIndex = 0;
 
-  final taskbarController = Get.put(TaskbarController());
+  final taskbarController = Get.find<TaskbarController>();
 
   @override
   Widget build(BuildContext context) {

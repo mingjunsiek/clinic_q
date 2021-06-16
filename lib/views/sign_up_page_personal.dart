@@ -134,6 +134,7 @@ class _SignUpPagePersonalState extends State<SignUpPagePersonal> {
                             FormSpacing(),
                             PrimaryButton(
                               buttonText: 'Next',
+                              color: kPrimaryBtnColor,
                               btnFunction: () {
                                 if (_formKey.currentState!.validate()) {
                                   signUpController.setPersonal(
