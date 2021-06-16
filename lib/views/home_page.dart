@@ -1,4 +1,4 @@
-import 'package:clinic_q/views/google_map.dart';
+import 'package:clinic_q/views/mapscreen_page.dart';
 import 'package:flutter/material.dart';
 import 'package:clinic_q/utils/constants.dart';
 import 'package:clinic_q/widgets/FormTextField.dart';
