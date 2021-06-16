@@ -1,4 +1,6 @@
 import 'package:clinic_q/controllers/flutter_fire_controller.dart';
+import 'package:clinic_q/controllers/taskbar_controller.dart';
+import 'package:clinic_q/controllers/user_controller.dart';
 import 'package:clinic_q/utils/constants.dart';
 import 'package:clinic_q/views/splash_screen_page.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +17,9 @@ void main() async {
 class InitializeService extends GetxService {
   Future<InitializeService> init() async {
     Get.put(FlutterFireController());
+    Get.put(TaskbarController());
+    Get.put(UserController());
+
     return this;
   }
 }

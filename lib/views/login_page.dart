@@ -95,6 +95,7 @@ class _LoginPageState extends State<LoginPage> {
                             FormSpacing(),
                             PrimaryButton(
                               buttonText: 'Login',
+                              color: kPrimaryBtnColor,
                               btnFunction: () async {
                                 if (_formKey.currentState!.validate()) {
                                   String result = await loginController.login(

@@ -8,7 +8,6 @@ import 'package:get/get.dart';
 class TaskbarController extends GetxController {
   final currentIndex = 0.obs;
   final pageWidgetIndex = 0.obs;
-
   List<Widget> widgetList = <Widget>[
     MapScreen(),
     SettingPage(),
@@ -26,7 +25,13 @@ class TaskbarController extends GetxController {
     pageWidgetIndex.value = updatedIndex;
   }
 
-  void updateToClinicInfo(String clinicID) {
-    widgetList[0] = ClinicInfoPage();
+  void updateToClinicInfo(String selectedID) {
+    widgetList[0] = ClinicInfoPage(
+      clinicID: selectedID,
+    );
+  }
+
+  void updateToMapPage() {
+    widgetList[0] = MapScreen();
   }
 }

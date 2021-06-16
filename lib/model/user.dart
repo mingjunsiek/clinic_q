@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class User {
   String nric;
   String email;
@@ -46,7 +48,7 @@ class User {
       'firstName': firstName,
       'lastName': lastName,
       'phone': phone,
-      'dob': dob.millisecondsSinceEpoch,
+      'dob': Timestamp.fromDate(dob),
       'allergies': allergies,
     };
   }
@@ -58,7 +60,7 @@ class User {
       firstName: map['firstName'],
       lastName: map['lastName'],
       phone: map['phone'],
-      dob: DateTime.fromMillisecondsSinceEpoch(map['dob']),
+      dob: (map['dob'] as Timestamp).toDate(),
       allergies: map['allergies'],
     );
   }

@@ -42,6 +42,10 @@ class ClinicController extends GetxController {
     print(clinicList.length);
   }
 
+  Clinic getClinicDetails(String clinicID) {
+    return clinicList.firstWhere((clinic) => clinic.clinicID == clinicID);
+  }
+
   void resetFilter() {
     clinicList.value = initialClinicList;
   }

@@ -41,7 +41,8 @@ class NearbyClinicPanel extends StatelessWidget {
                       Card(
                         child: ListTile(
                           onTap: () {
-                            taskbarController.updateToClinicInfo("test");
+                            taskbarController.updateToClinicInfo(
+                                clinicController.clinicList[index].clinicID);
                           },
                           leading: FittedBox(
                             fit: BoxFit.contain,

@@ -67,6 +67,7 @@ class _SignUpPageAllergiesState extends State<SignUpPageAllergies> {
                           children: [
                             PrimaryButton(
                                 buttonText: 'Next',
+                                color: kPrimaryBtnColor,
                                 btnFunction: () {
                                   signUpController.setAllergies(
                                       _allergiesController.text.trim());
