@@ -133,38 +133,11 @@ class _AllergiesPageState extends State<AllergiesPage> {
                               ],
                             ),
                           )))
-                  : NoConnectionLayout(),
+                  : Center(
+                      child: CircularProgressIndicator(),
+                    ),
             )),
       ),
     );
   }
-}
-
-class NoConnectionLayout extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return _refreshView(context);
-  }
-}
-
-Widget _refreshView(BuildContext context) {
-  return Form(
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 16.0),
-          child: ElevatedButton(
-            onPressed: () {
-              ScaffoldMessenger.of(context)
-                  .showSnackBar(SnackBar(content: Text('Processing Data')));
-              Navigator.pop(context); // pop current page
-              Navigator.pushNamed(context, "AllergiesPage"); // push it back in
-            },
-            child: Text('Refresh'),
-          ),
-        ),
-      ],
-    ),
-  );
 }

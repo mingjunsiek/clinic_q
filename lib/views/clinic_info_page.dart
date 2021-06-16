@@ -53,22 +53,34 @@ class _ClinicInfoPageState extends State<ClinicInfoPage> {
                   height: 300.0,
                   child: Container(
                     child: GoogleMapWidget(
-                      clinicId: 1,
-                      clinicName: 'clinic ABC',
-                      streetName: 'Marsling 748',
-                      lat: 1.4256814230789063,
-                      lng: 103.83264571014811,
+                      clinicId: clinic.clinicID,
+                      clinicName: clinic.clinicName,
+                      streetName: clinic.streetName,
+                      lat: clinic.lat,
+                      lng: clinic.lng,
                     ),
                   ),
                 ),
+                Obx(
+                  () => OverviewCard({
+                    'Current Queue Number':
+                        clinicInfoController.currentQueue.value.toString(),
+                  }),
+                ),
+                Obx(
+                  () => userController.hasAppointment.value
+                      ? OverviewCard({
+                          'Your Queue Number': userController
+                              .currentAppointment.value.queueNo
+                              .toString(),
+                        })
+                      : Container(),
+                ),
                 OverviewCard({
-                  'Current Queue Number': 5.toString(),
-                  'Your Number': 10.toString(),
-                }),
-                OverviewCard({
-                  'Contact': '12345678',
-                  'Address': '131 MARSLING RISE, #02-313, 784833',
-                  'Clinic': 'Clinic ABC',
+                  'Contact': clinic.clinicTelNo,
+                  'Address':
+                      '${clinic.blkHseNo} ${clinic.streetName} #${clinic.floorNo}-${clinic.unitNo} S(${clinic.postalCode})',
+                  'Clinic': clinic.clinicName,
                 }),
                 FormSpacing(),
                 PrimaryButton(

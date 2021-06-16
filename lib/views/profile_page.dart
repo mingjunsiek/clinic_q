@@ -1,3 +1,5 @@
+import 'package:clinic_q/controllers/taskbar_controller.dart';
+import 'package:clinic_q/utils/constants.dart';
 import 'package:clinic_q/views/allergies_page.dart';
 import 'package:clinic_q/views/personal_info_page.dart';
 import 'package:flutter/material.dart';
@@ -47,6 +49,7 @@ class ProfileLayout extends StatelessWidget {
 }
 
 Widget _profileView(BuildContext context) {
+  final taskbarController = Get.find<TaskbarController>();
   return ListView(
     children: ListTile.divideTiles(
       context: context,
@@ -59,7 +62,7 @@ Widget _profileView(BuildContext context) {
             style: TextStyle(color: Colors.black),
           ),
           onTap: () {
-            Get.to(PersonalInfoPage());
+            taskbarController.updatePageIndex(Navigation.personalEnum.index);
           },
         ),
         ListTile(
@@ -70,7 +73,7 @@ Widget _profileView(BuildContext context) {
             style: TextStyle(color: Colors.black),
           ),
           onTap: () {
-            Get.to(AllergiesPage());
+            taskbarController.updatePageIndex(Navigation.allergiesEnum.index);
           },
         ),
       ],
