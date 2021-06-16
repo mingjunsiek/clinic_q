@@ -35,6 +35,10 @@ class _TaskBarScreenState extends State<TaskBarScreen> {
                 label: 'Home',
               ),
               BottomNavigationBarItem(
+                icon: Icon(Icons.list_alt_rounded),
+                label: 'History',
+              ),
+              BottomNavigationBarItem(
                 icon: Icon(Icons.settings),
                 label: 'Settings',
               ),

@@ -1,4 +1,5 @@
 import 'package:clinic_q/controllers/clinic_controller.dart';
+import 'package:clinic_q/controllers/clinic_info_controller.dart';
 import 'package:clinic_q/controllers/taskbar_controller.dart';
 import 'package:clinic_q/utils/size_helpers.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +10,7 @@ class NearbyClinicPanel extends StatelessWidget {
   final ScrollController controller;
   final clinicController = Get.find<ClinicController>();
   final taskbarController = Get.find<TaskbarController>();
+  final clinicInfoController = Get.find<ClinicInfoController>();
 
   NearbyClinicPanel({
     Key? key,
@@ -41,6 +43,8 @@ class NearbyClinicPanel extends StatelessWidget {
                       Card(
                         child: ListTile(
                           onTap: () {
+                            clinicInfoController.autoRefresh(
+                                clinicController.clinicList[index].clinicID);
                             taskbarController.updateToClinicInfo(
                                 clinicController.clinicList[index].clinicID);
                           },

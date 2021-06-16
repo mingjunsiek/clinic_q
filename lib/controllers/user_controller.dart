@@ -10,6 +10,7 @@ class UserController extends GetxController {
   final hasAppointment = false.obs;
   final appointmentHistory = List<Appointment>.empty().obs;
   final currentAppointment = Appointment(
+          clinicName: "",
           clinicID: '',
           queueNo: -1,
           userID: '',
@@ -81,7 +82,7 @@ class UserController extends GetxController {
         compareDate(appointmentHistory[0].appointmentDate, DateTime.now())) {
       hasAppointment.value = true;
       currentAppointment.value = appointmentHistory[0];
-      print("There is a current appointment...");
+      print("Appointment History: ${appointmentHistory.length}");
       taskbarController.updateToClinicInfo(currentAppointment.value.clinicID);
     } else {
       print("No Appointments Yet...");

@@ -46,6 +46,7 @@ bool isPhoneNum(String value) {
 
 enum Navigation {
   mapEnum,
+  historyEnum,
   settingEnum,
   profileEnum,
 }

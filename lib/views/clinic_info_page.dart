@@ -1,4 +1,5 @@
 import 'package:clinic_q/controllers/clinic_controller.dart';
+import 'package:clinic_q/controllers/clinic_info_controller.dart';
 import 'package:clinic_q/controllers/flutter_fire_controller.dart';
 import 'package:clinic_q/controllers/taskbar_controller.dart';
 import 'package:clinic_q/controllers/user_controller.dart';
@@ -23,6 +24,8 @@ class _ClinicInfoPageState extends State<ClinicInfoPage> {
   final flutterFireController = Get.find<FlutterFireController>();
   final userController = Get.find<UserController>();
   final clinicController = Get.find<ClinicController>();
+  final clinicInfoController = Get.find<ClinicInfoController>();
+
   @override
   Widget build(BuildContext context) {
     final clinic = clinicController.getClinicDetails(widget.clinicID);
@@ -37,12 +40,43 @@ class _ClinicInfoPageState extends State<ClinicInfoPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Expanded(
-                      flex: 4,
-                      child: Text(
-                        clinic.clinicID,
-                        style: TextStyle(color: Colors.black),
+                      flex: 1,
+                      child: Column(
+                        children: [
+                          Text(
+                            clinic.clinicID,
+                            style: TextStyle(color: Colors.black),
+                          ),
+                          Text(
+                            clinic.clinicName,
+                            style: TextStyle(color: Colors.black),
+                          ),
+                        ],
                       ),
                     ),
+                    Card(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Text(
+                            "Current Queue",
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          Obx(() => Text(
+                                clinicInfoController.currentQueue.value
+                                    .toString(),
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 30,
+                                    fontWeight: FontWeight.bold),
+                              )),
+                        ],
+                      ),
+                    ),
+                    Spacer(),
                     Column(
                       children: [
                         PrimaryButton(
@@ -63,8 +97,10 @@ class _ClinicInfoPageState extends State<ClinicInfoPage> {
                                 )
                               : PrimaryButton(
                                   btnFunction: () async {
-                                    await flutterFireController
-                                        .makeAppointment(clinic.clinicID);
+                                    await flutterFireController.makeAppointment(
+                                      clinic.clinicID,
+                                      clinic.clinicName,
+                                    );
                                   },
                                   buttonText: "Book Appointment",
                                   color: kPrimaryBtnColor,

@@ -1,5 +1,6 @@
 import 'package:clinic_q/model/clinic.dart';
 import 'package:clinic_q/views/clinic_info_page.dart';
+import 'package:clinic_q/views/history_page.dart';
 import 'package:clinic_q/views/mapscreen_page.dart';
 import 'package:clinic_q/views/profile_page.dart';
 import 'package:clinic_q/views/setting_page.dart';
@@ -11,6 +12,7 @@ class TaskbarController extends GetxController {
   final pageWidgetIndex = 0.obs;
   List<Widget> widgetList = <Widget>[
     MapScreen(),
+    HistoryPage(),
     SettingPage(),
     ProfilePage(),
   ].obs;
@@ -18,7 +20,8 @@ class TaskbarController extends GetxController {
   Map<int, int> pageList = {
     0: 0,
     1: 1,
-    2: 1,
+    2: 2,
+    3: 2,
   };
 
   void updatePageIndex(int updatedIndex) {

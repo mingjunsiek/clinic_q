@@ -1,3 +1,4 @@
+import 'package:clinic_q/controllers/clinic_info_controller.dart';
 import 'package:clinic_q/controllers/user_controller.dart';
 import 'package:clinic_q/model/appointment.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -20,7 +21,7 @@ class FlutterFireController extends GetxController {
     firestore = FirebaseFirestore.instance;
   }
 
-  Future<int> makeAppointment(String clinicID) async {
+  Future<int> makeAppointment(String clinicID, String clinicName) async {
     String currDate = DateFormat('ddMMyyyy').format(DateTime.now());
     String? userID = auth.currentUser?.uid;
     DocumentReference queueDocRef = firestore
@@ -66,6 +67,7 @@ class FlutterFireController extends GetxController {
 
       Appointment newAppt = Appointment(
         clinicID: clinicID,
+        clinicName: clinicName,
         queueNo: newTotalInQueue,
         userID: userID!,
         appointmentDate: DateTime.now(),
@@ -85,7 +87,8 @@ class FlutterFireController extends GetxController {
         );
       }
       final userController = Get.find<UserController>();
-
+      final clinicInfoController = Get.find<ClinicInfoController>();
+      clinicInfoController.autoRefresh(clinicID);
       userController.createAppointment(newAppt);
     });
 
