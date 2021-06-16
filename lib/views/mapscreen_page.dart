@@ -1,5 +1,4 @@
 import 'package:clinic_q/controllers/clinic_controller.dart';
-import 'package:clinic_q/widgets/ConfirmationPanel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
