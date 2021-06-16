@@ -89,11 +89,11 @@ class _ClinicInfoPageState extends State<ClinicInfoPage> {
                 PrimaryButton(
                   btnFunction: () async {
                     final availableMaps = await MapLauncher.installedMaps;
-                    print(
-                        availableMaps); // [AvailableMap { mapName: Google Maps, mapType: google }, ...]
+
                     await availableMaps.first.showDirections(
                         destination: Coords(clinic.lat, clinic.lng),
-                        destinationTitle: clinic.clinicName);
+                        destinationTitle: clinic.clinicName,
+                        directionsMode: DirectionsMode.transit);
                   },
                   buttonText: "Directions",
                   color: kDirectionBtnColor,

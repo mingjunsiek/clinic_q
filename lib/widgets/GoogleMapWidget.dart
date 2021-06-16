@@ -26,6 +26,17 @@ class _GoogleMapWidgetState extends State<GoogleMapWidget> {
   final Set<Marker> _clinicMarkers = {};
 
   @override
+  void initState() {
+    _clinicMarkers.add(Marker(
+      markerId: MarkerId(widget.clinicId),
+      position: LatLng(widget.lat, widget.lng),
+      infoWindow:
+          InfoWindow(title: widget.clinicName, snippet: widget.streetName),
+    ));
+    super.initState();
+  }
+
+  @override
   void dispose() {
     _googleMapController.dispose();
     super.dispose();
@@ -33,13 +44,6 @@ class _GoogleMapWidgetState extends State<GoogleMapWidget> {
 
   void _onMapCreated(GoogleMapController _cntlr) {
     _googleMapController = _cntlr;
-    print("LATLNG: ${widget.lat} ${widget.lng}");
-    _clinicMarkers.add(Marker(
-      markerId: MarkerId(widget.clinicId),
-      position: LatLng(widget.lat, widget.lng),
-      infoWindow:
-          InfoWindow(title: widget.clinicName, snippet: widget.streetName),
-    ));
   }
 
   @override

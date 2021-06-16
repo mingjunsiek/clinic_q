@@ -26,9 +26,6 @@ class _MapScreenState extends State<MapScreen> {
   final panelHeightOpen = 0.0.obs;
   final panelHeightClosed = 100.0.obs;
 
-  //if user booked an appointment
-  final isBookedAppt = false.obs;
-
   LatLng _initialCameraPosition = LatLng(
     1.3538107695634425,
     103.85797370238132,
@@ -38,6 +35,16 @@ class _MapScreenState extends State<MapScreen> {
   void initState() {
     checkForLocationPermission();
     fabHeight.value = initFabHeight;
+
+    clinicController.clinicList.forEach((clinic) {
+      print(clinic);
+      _clinicMarkers.add(Marker(
+        markerId: MarkerId(clinic.clinicID),
+        position: LatLng(clinic.lat, clinic.lng),
+        infoWindow:
+            InfoWindow(title: clinic.clinicName, snippet: clinic.streetName),
+      ));
+    });
     super.initState();
   }
 
@@ -91,15 +98,6 @@ class _MapScreenState extends State<MapScreen> {
   void _onMapCreated(GoogleMapController _cntlr) {
     _googleMapController = _cntlr;
 
-    clinicController.clinicList.forEach((clinic) {
-      _clinicMarkers.add(Marker(
-        markerId: MarkerId(clinic.clinicID),
-        position: LatLng(clinic.lat, clinic.lng),
-        infoWindow:
-            InfoWindow(title: clinic.clinicName, snippet: clinic.streetName),
-      ));
-    });
-
     _location.getLocation().then((LocationData l) {
       _initialCameraPosition = LatLng(
         l.latitude ?? 1.3538107695634425,
@@ -119,6 +117,7 @@ class _MapScreenState extends State<MapScreen> {
   @override
   void dispose() {
     _googleMapController.dispose();
+    print('dispose');
     super.dispose();
   }
 
