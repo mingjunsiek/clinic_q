@@ -1,6 +1,8 @@
+import 'package:clinic_q/views/allergies_page.dart';
 import 'package:clinic_q/views/clinic_info_page.dart';
 import 'package:clinic_q/views/history_page.dart';
 import 'package:clinic_q/views/mapscreen_page.dart';
+import 'package:clinic_q/views/personal_info_page.dart';
 import 'package:clinic_q/views/profile_page.dart';
 import 'package:clinic_q/views/setting_page.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +16,8 @@ class TaskbarController extends GetxController {
     HistoryPage(),
     SettingPage(),
     ProfilePage(),
+    PersonalInfoPage(),
+    AllergiesPage(),
   ].obs;
 
   Map<int, int> pageList = {
@@ -21,6 +25,8 @@ class TaskbarController extends GetxController {
     1: 1,
     2: 2,
     3: 2,
+    4: 2,
+    5: 2,
   };
 
   void updatePageIndex(int updatedIndex) {

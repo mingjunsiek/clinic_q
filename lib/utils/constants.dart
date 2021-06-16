@@ -49,4 +49,6 @@ enum Navigation {
   historyEnum,
   settingEnum,
   profileEnum,
+  personalEnum,
+  allergiesEnum,
 }

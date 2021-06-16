@@ -1,3 +1,4 @@
+import 'package:clinic_q/controllers/clinic_info_controller.dart';
 import 'package:clinic_q/controllers/flutter_fire_controller.dart';
 import 'package:clinic_q/controllers/taskbar_controller.dart';
 import 'package:clinic_q/model/appointment.dart';
@@ -19,6 +20,7 @@ class UserController extends GetxController {
 
   final flutterFireController = Get.find<FlutterFireController>();
   final taskbarController = Get.find<TaskbarController>();
+  final clinicInfoController = Get.find<ClinicInfoController>();
 
   bool isLogin() {
     if (flutterFireController.auth.currentUser != null) {
@@ -178,6 +180,7 @@ class UserController extends GetxController {
       hasAppointment.value = true;
       currentAppointment.value = appointmentHistory[0];
       print("Appointment History: ${appointmentHistory.length}");
+      clinicInfoController.autoRefresh(currentAppointment.value.clinicID);
       taskbarController.updateToClinicInfo(currentAppointment.value.clinicID);
     } else {
       print("No Appointments Yet...");

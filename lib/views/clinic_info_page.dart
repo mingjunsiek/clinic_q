@@ -62,26 +62,25 @@ class _ClinicInfoPageState extends State<ClinicInfoPage> {
                   ),
                 ),
                 Obx(
+                  () => OverviewCard({
+                    'Current Queue Number':
+                        clinicInfoController.currentQueue.value.toString(),
+                  }),
+                ),
+                Obx(
                   () => userController.hasAppointment.value
                       ? OverviewCard({
-                          'Current Queue Number':
-                              clinicInfoController.currentQueue().toString(),
-                          'Your Number': userController
-                              .currentAppointment()
-                              .queueNo
+                          'Your Queue Number': userController
+                              .currentAppointment.value.queueNo
                               .toString(),
                         })
-                      : OverviewCard({
-                          'Current Queue Number':
-                              clinicInfoController.currentQueue().toString(),
-                        }),
+                      : Container(),
                 ),
                 OverviewCard({
                   'Contact': clinic.clinicTelNo,
                   'Address':
                       'Block ${clinic.blkHseNo} ${clinic.streetName}, ${clinic.floorNo}-${clinic.unitNo}\nSingapore ${clinic.postalCode}'
                           .toUpperCase(),
-                  'Clinic': clinic.clinicName,
                 }),
                 FormSpacing(),
                 PrimaryButton(
