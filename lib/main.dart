@@ -26,7 +26,26 @@ class InitializeService extends GetxService {
   }
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  late Image loginImage;
+
+  @override
+  void initState() {
+    super.initState();
+    loginImage = Image.asset('assets/images/Login_Background.jpg');
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    precacheImage(loginImage.image, context);
+  }
+
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
