@@ -1,4 +1,3 @@
-import 'package:clinic_q/model/clinic.dart';
 import 'package:clinic_q/views/clinic_info_page.dart';
 import 'package:clinic_q/views/history_page.dart';
 import 'package:clinic_q/views/mapscreen_page.dart';

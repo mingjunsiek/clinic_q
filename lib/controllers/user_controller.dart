@@ -16,6 +16,7 @@ class UserController extends GetxController {
           userID: '',
           appointmentDate: DateTime.now())
       .obs;
+
   final flutterFireController = Get.find<FlutterFireController>();
   final taskbarController = Get.find<TaskbarController>();
 
@@ -25,6 +26,100 @@ class UserController extends GetxController {
       return true;
     } else
       return false;
+  }
+
+  Future<void> updateUserDetails(
+    String nric,
+    String firstName,
+    String lastName,
+    String phone,
+  ) {
+    var currentUser = flutterFireController.auth.currentUser;
+    late String uid;
+    if (currentUser != null) {
+      uid = currentUser.uid.toString();
+    }
+    return FirebaseFirestore.instance
+        .collection('users')
+        .doc(uid)
+        .update({
+          'nric': nric,
+          'firstName': firstName,
+          'lastName': lastName,
+          'phone': phone
+        })
+        .then((value) => print("User Updated"))
+        .catchError((error) => print("Failed to update user: $error"));
+  }
+
+  Future<void> updateUserAllergies(
+    String allergies,
+  ) {
+    var currentUser = flutterFireController.auth.currentUser;
+    late String uid;
+    if (currentUser != null) {
+      uid = currentUser.uid.toString();
+    }
+    return FirebaseFirestore.instance
+        .collection('users')
+        .doc(uid)
+        .update({
+          'allergies': allergies,
+        })
+        .then((value) => print("User Allergies Updated"))
+        .catchError((error) => print("Failed to update user: $error"));
+  }
+
+  Future<void> getUserDetails() async {
+    String uid = flutterFireController.auth.currentUser!.uid.toString();
+    await flutterFireController.firestore
+        .collection('users')
+        .doc(uid)
+        .get()
+        .then((DocumentSnapshot userData) {
+      List<String> test = userData.data().toString().split(',');
+      String allergy = test.elementAt(0);
+      String firstName = test.elementAt(1);
+      String lastName = test.elementAt(2);
+      String phoneNo = test.elementAt(3);
+      String dob1 = test.elementAt(4);
+      //String dob2 = test.elementAt(5);
+      String nric = test.elementAt(6);
+      String email = test.elementAt(7);
+
+      allergy = allergy.replaceAll("{", " ");
+      allergy = allergy.substring(allergy.indexOf(":") + 1);
+      allergy.trim();
+      firstName = firstName.substring(firstName.indexOf(":") + 1);
+      firstName.trim();
+      lastName = lastName.substring(lastName.indexOf(":") + 1);
+      lastName.trim();
+      phoneNo = phoneNo.substring(phoneNo.indexOf(":") + 1);
+      phoneNo.trim();
+      dob1 = dob1.substring(dob1.indexOf("=") + 1);
+      dob1.trim();
+      String dobSec = dob1;
+      //dob2 = dob2.substring(dob2.indexOf("=") + 1);
+      //dob2.trim();
+      //dob2 = dob2.replaceAll(")", " ");
+      //String dobNSec = dob2;
+      //Timestamp ts = Timestamp(int.parse(dobSec), int.parse(dobNSec));
+      DateTime dob = DateTime(int.parse(dobSec));
+      nric = nric.substring(nric.indexOf(":") + 1);
+      nric.trim();
+      email = email.replaceAll("}", " ");
+      email = email.substring(email.indexOf(":") + 1);
+      email.trim();
+
+      user = User(
+          allergies: allergy.trim(),
+          firstName: firstName.trim(),
+          lastName: lastName.trim(),
+          phone: phoneNo.trim(),
+          dob: dob,
+          nric: nric.trim(),
+          email: email.trim());
+    });
   }
 
   void updateUserInfo({

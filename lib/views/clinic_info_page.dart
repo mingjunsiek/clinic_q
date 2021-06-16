@@ -7,6 +7,8 @@ import 'package:clinic_q/utils/constants.dart';
 import 'package:clinic_q/widgets/FormSpacing.dart';
 import 'package:clinic_q/widgets/PrimaryButton.dart';
 import 'package:flutter/material.dart';
+import 'package:clinic_q/widgets/GoogleMapWidget.dart';
+import 'package:clinic_q/widgets/OverviewCard.dart';
 import 'package:get/get.dart';
 
 class ClinicInfoPage extends StatefulWidget {
@@ -30,96 +32,83 @@ class _ClinicInfoPageState extends State<ClinicInfoPage> {
   Widget build(BuildContext context) {
     final clinic = clinicController.getClinicDetails(widget.clinicID);
 
-    return WillPopScope(
-        child: SafeArea(
-          child: Scaffold(
-            body: Center(
-              child: Container(
-                padding: EdgeInsets.all(defaultPadding),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Expanded(
-                      flex: 1,
-                      child: Column(
-                        children: [
-                          Text(
-                            clinic.clinicID,
-                            style: TextStyle(color: Colors.black),
-                          ),
-                          Text(
-                            clinic.clinicName,
-                            style: TextStyle(color: Colors.black),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Card(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Text(
-                            "Current Queue",
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          Obx(() => Text(
-                                clinicInfoController.currentQueue.value
-                                    .toString(),
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 30,
-                                    fontWeight: FontWeight.bold),
-                              )),
-                        ],
-                      ),
-                    ),
-                    Spacer(),
-                    Column(
-                      children: [
-                        PrimaryButton(
-                          btnFunction: () {},
-                          buttonText: "Directions",
-                          color: kDirectionBtnColor,
-                        ),
-                        FormSpacing(),
-                        Obx(
-                          () => userController.hasAppointment.value
-                              ? PrimaryButton(
-                                  btnFunction: () async {
-                                    await flutterFireController
-                                        .deleteAppointment(clinic.clinicID);
-                                  },
-                                  buttonText: "Cancel Appointment",
-                                  color: kCancelBtnColor,
-                                )
-                              : PrimaryButton(
-                                  btnFunction: () async {
-                                    await flutterFireController.makeAppointment(
-                                      clinic.clinicID,
-                                      clinic.clinicName,
-                                    );
-                                  },
-                                  buttonText: "Book Appointment",
-                                  color: kPrimaryBtnColor,
-                                ),
-                        ),
-                      ],
-                    ),
-                  ],
+    return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.all(defaultPadding),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Text(
+                clinic.clinicName,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 25.0,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-            ),
+              FormSpacing(),
+              Container(
+                height: 300.0,
+                child: Container(
+                  child: GoogleMapWidget(
+                    clinicId: 1,
+                    clinicName: 'clinic ABC',
+                    streetName: 'Marsling 748',
+                    lat: 1.4256814230789063,
+                    lng: 103.83264571014811,
+                  ),
+                ),
+              ),
+              OverviewCard({
+                'Current Queue Number': 5.toString(),
+                'Your Number': 10.toString(),
+              }),
+              OverviewCard({
+                'Contact': '12345678',
+                'Address': '131 MARSLING RISE, #02-313, 784833',
+                'Clinic': 'Clinic ABC',
+              }),
+              FormSpacing(),
+              PrimaryButton(
+                btnFunction: () {},
+                buttonText: "Directions",
+                color: kDirectionBtnColor,
+              ),
+              FormSpacing(),
+              Obx(
+                () => userController.hasAppointment.value
+                    ? PrimaryButton(
+                        btnFunction: () async {
+                          await flutterFireController
+                              .deleteAppointment(clinic.clinicID);
+                        },
+                        buttonText: "Cancel Appointment",
+                        color: kCancelBtnColor,
+                      )
+                    : PrimaryButton(
+                        btnFunction: () async {
+                          await flutterFireController.makeAppointment(
+                            clinic.clinicID,
+                            clinic.clinicName,
+                          );
+                        },
+                        buttonText: "Book Appointment",
+                        color: kPrimaryBtnColor,
+                      ),
+              ),
+            ],
           ),
         ),
-        onWillPop: () async {
-          if (!userController.hasAppointment.value) {
-            taskbarController.updateToMapPage();
-            return false;
-          }
-          return true;
-        });
+      ),
+    );
   }
 }
+
+// onWillPop: () async {
+//           if (!userController.hasAppointment.value) {
+//             taskbarController.updateToMapPage();
+//             return false;
+//           }
+//           return true;
+//         });

@@ -1,3 +1,4 @@
+import 'package:clinic_q/views/allergies_page.dart';
 import 'package:clinic_q/views/personal_info_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -31,14 +32,14 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 preferredSize: Size.fromHeight(1.0)),
           ),
-          body: BodyLayout(),
+          body: ProfileLayout(),
         ),
       ),
     );
   }
 }
 
-class BodyLayout extends StatelessWidget {
+class ProfileLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return _profileView(context);
@@ -62,17 +63,6 @@ Widget _profileView(BuildContext context) {
           },
         ),
         ListTile(
-          leading: Icon(Icons.home_filled),
-          trailing: Icon(Icons.keyboard_arrow_right),
-          title: Text(
-            'Address',
-            style: TextStyle(color: Colors.black),
-          ),
-          onTap: () {
-            print('Address');
-          },
-        ),
-        ListTile(
           leading: Icon(Icons.sick),
           trailing: Icon(Icons.keyboard_arrow_right),
           title: Text(
@@ -80,7 +70,7 @@ Widget _profileView(BuildContext context) {
             style: TextStyle(color: Colors.black),
           ),
           onTap: () {
-            print('Allergies');
+            Get.to(AllergiesPage());
           },
         ),
       ],
