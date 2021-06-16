@@ -29,6 +29,12 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
     _phoneController.dispose();
   }
 
+  TextEditingController _updateText(
+      TextEditingController controller, String text) {
+    controller.text = text;
+    return controller;
+  }
+
   User cu = new User(
       nric: " ",
       email: " ",
@@ -87,11 +93,12 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: <Widget>[
                                       TextFormField(
-                                        controller: _nricController,
+                                        controller: _updateText(
+                                            _nricController, curr.data!.nric),
                                         //initialValue: curr.data!.nric,
                                         decoration: InputDecoration(
-                                            labelText: 'NRIC',
-                                            hintText: curr.data!.nric),
+                                          labelText: 'NRIC',
+                                        ),
                                         textAlign: TextAlign.left,
                                         style: TextStyle(color: Colors.black),
                                         validator: (text) {
@@ -103,11 +110,12 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
                                       ),
                                       FormSpacing(),
                                       TextFormField(
-                                        controller: _firstNameController,
+                                        controller: _updateText(
+                                            _firstNameController,
+                                            curr.data!.firstName),
                                         //initialValue: curr.data?.firstName,
                                         decoration: InputDecoration(
                                           labelText: 'First Name',
-                                          hintText: curr.data?.firstName,
                                         ),
                                         textAlign: TextAlign.left,
                                         style: TextStyle(color: Colors.black),
@@ -120,11 +128,12 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
                                       ),
                                       FormSpacing(),
                                       TextFormField(
-                                        controller: _lastNameController,
+                                        controller: _updateText(
+                                            _lastNameController,
+                                            curr.data!.lastName),
                                         //initialValue: curr.data?.lastName,
                                         decoration: InputDecoration(
                                           labelText: 'Last Name',
-                                          hintText: curr.data?.lastName,
                                         ),
                                         textAlign: TextAlign.left,
                                         style: TextStyle(color: Colors.black),
@@ -137,11 +146,11 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
                                       ),
                                       FormSpacing(),
                                       TextFormField(
-                                        controller: _phoneController,
+                                        controller: _updateText(
+                                            _phoneController, curr.data!.phone),
                                         //initialValue: curr.data?.phone,
                                         decoration: InputDecoration(
                                           labelText: 'Phone No.',
-                                          hintText: curr.data?.phone,
                                         ),
                                         textAlign: TextAlign.left,
                                         style: TextStyle(color: Colors.black),
