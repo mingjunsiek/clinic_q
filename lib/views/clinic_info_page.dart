@@ -53,22 +53,35 @@ class _ClinicInfoPageState extends State<ClinicInfoPage> {
                   height: 300.0,
                   child: Container(
                     child: GoogleMapWidget(
-                      clinicId: 1,
-                      clinicName: 'clinic ABC',
-                      streetName: 'Marsling 748',
-                      lat: 1.4256814230789063,
-                      lng: 103.83264571014811,
+                      clinicId: clinic.clinicID,
+                      clinicName: clinic.clinicName.toString(),
+                      streetName: clinic.streetName.toString(),
+                      lat: clinic.lat,
+                      lng: clinic.lng,
                     ),
                   ),
                 ),
+                Obx(
+                  () => userController.hasAppointment.value
+                      ? OverviewCard({
+                          'Current Queue Number':
+                              clinicInfoController.currentQueue().toString(),
+                          'Your Number': userController
+                              .currentAppointment()
+                              .queueNo
+                              .toString(),
+                        })
+                      : OverviewCard({
+                          'Current Queue Number':
+                              clinicInfoController.currentQueue().toString(),
+                        }),
+                ),
                 OverviewCard({
-                  'Current Queue Number': 5.toString(),
-                  'Your Number': 10.toString(),
-                }),
-                OverviewCard({
-                  'Contact': '12345678',
-                  'Address': '131 MARSLING RISE, #02-313, 784833',
-                  'Clinic': 'Clinic ABC',
+                  'Contact': clinic.clinicTelNo,
+                  'Address':
+                      'Block ${clinic.blkHseNo} ${clinic.streetName}, ${clinic.floorNo}-${clinic.unitNo}\nSingapore ${clinic.postalCode}'
+                          .toUpperCase(),
+                  'Clinic': clinic.clinicName,
                 }),
                 FormSpacing(),
                 PrimaryButton(
