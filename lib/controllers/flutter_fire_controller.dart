@@ -89,6 +89,7 @@ class FlutterFireController extends GetxController {
       final userController = Get.find<UserController>();
       final clinicInfoController = Get.find<ClinicInfoController>();
       clinicInfoController.autoRefresh(clinicID);
+      clinicInfoController.totalQueue.value = newTotalInQueue;
       userController.createAppointment(newAppt);
     });
 

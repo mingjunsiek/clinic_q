@@ -47,25 +47,6 @@ class NearbyClinicPanel extends StatelessWidget {
                             taskbarController.updateToClinicInfo(
                                 clinicController.clinicList[index].clinicID);
                           },
-                          // leading: FittedBox(
-                          //   fit: BoxFit.contain,
-                          //   child: Container(
-                          //     width: displayWidth(context) * 0.6,
-                          //     child: Column(
-                          //       crossAxisAlignment: CrossAxisAlignment.start,
-                          //       children: [
-                          //         Text(
-                          //           '${clinicController.clinicList[index].clinicName}',
-                          //           style: TextStyle(color: Colors.black),
-                          //         ),
-                          //         Text(
-                          //           '${clinicController.clinicList[index].streetName}',
-                          //           style: TextStyle(color: kUnselectedColor),
-                          //         ),
-                          //       ],
-                          //     ),
-                          //   ),
-                          // ),
                           title: Text(
                             '${clinicController.clinicList[index].clinicName}',
                             style: TextStyle(color: Colors.black),
@@ -74,19 +55,6 @@ class NearbyClinicPanel extends StatelessWidget {
                             '${clinicController.clinicList[index].streetName}',
                             style: TextStyle(color: kUnselectedColor),
                           ),
-                          // trailing: Column(
-                          //   crossAxisAlignment: CrossAxisAlignment.center,
-                          //   children: [
-                          //     Text(
-                          //       "Current Queue",
-                          //       style: TextStyle(color: Colors.black),
-                          //     ),
-                          //     Text(
-                          //       "5/25",
-                          //       style: TextStyle(color: kUnselectedColor),
-                          //     ),
-                          //   ],
-                          // ),
                         ),
                       ),
                     ],

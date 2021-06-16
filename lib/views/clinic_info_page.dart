@@ -66,6 +66,8 @@ class _ClinicInfoPageState extends State<ClinicInfoPage> {
                   () => OverviewCard({
                     'Current Queue Number':
                         clinicInfoController.currentQueue.value.toString(),
+                    'Total In Queue':
+                        clinicInfoController.totalQueue.value.toString(),
                   }),
                 ),
                 Obx(
@@ -133,11 +135,3 @@ class _ClinicInfoPageState extends State<ClinicInfoPage> {
     );
   }
 }
-
-// onWillPop: () async {
-//           if (!userController.hasAppointment.value) {
-//             taskbarController.updateToMapPage();
-//             return false;
-//           }
-//           return true;
-//         });

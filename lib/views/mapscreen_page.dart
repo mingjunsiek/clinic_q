@@ -1,5 +1,4 @@
 import 'package:clinic_q/controllers/clinic_controller.dart';
-import 'package:clinic_q/widgets/ConfirmationPanel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
@@ -141,7 +140,7 @@ class _MapScreenState extends State<MapScreen> {
 
   @override
   Widget build(BuildContext context) {
-    panelHeightOpen.value = MediaQuery.of(context).size.height - 300;
+    panelHeightOpen.value = MediaQuery.of(context).size.height - 500;
 
     return Material(
       child: SafeArea(
@@ -154,9 +153,8 @@ class _MapScreenState extends State<MapScreen> {
                 minHeight: panelHeightClosed(),
                 parallaxEnabled: true,
                 parallaxOffset: 0.5,
-                panelBuilder: (ScrollController sc) => isBookedAppt()
-                    ? ConfirmationPanel(controller: sc)
-                    : NearbyClinicPanel(controller: sc),
+                panelBuilder: (ScrollController sc) =>
+                    NearbyClinicPanel(controller: sc),
                 body: Center(
                   child: _googleMap(),
                 ),

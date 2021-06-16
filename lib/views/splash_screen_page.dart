@@ -18,7 +18,7 @@ class SplashScreenPage extends StatelessWidget {
     return AnimatedSplashScreen.withScreenFunction(
       splash: './assets/images/splash.jpg',
       splashTransition: SplashTransition.slideTransition,
-      pageTransitionType: PageTransitionType.bottomToTop,
+      pageTransitionType: PageTransitionType.fade,
       screenFunction: () async {
         clinicController.getClinicList();
         bool isLoggedIn = userController.isLogin();
