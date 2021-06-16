@@ -1,4 +1,5 @@
 import 'package:clinic_q/controllers/flutter_fire_controller.dart';
+import 'package:clinic_q/controllers/user_controller.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
@@ -8,6 +9,7 @@ class LoginController extends GetxController {
   var isLoggedIn = false;
 
   final flutterFireController = Get.put(FlutterFireController());
+  final userController = Get.find<UserController>();
 
   void isLogin() {
     print(flutterFireController.auth.currentUser);
@@ -18,8 +20,9 @@ class LoginController extends GetxController {
     required String password,
   }) async {
     try {
-      UserCredential userCredential = await flutterFireController.auth
+      await flutterFireController.auth
           .signInWithEmailAndPassword(email: email, password: password);
+      await userController.getCurrentAppt();
       return "";
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {

@@ -1,6 +1,9 @@
+import 'package:clinic_q/controllers/taskbar_controller.dart';
 import 'package:clinic_q/model/user.dart';
+import 'package:clinic_q/utils/constants.dart';
 import 'package:clinic_q/widgets/FormSpacing.dart';
 import 'package:clinic_q/controllers/user_controller.dart';
+import 'package:clinic_q/widgets/PrimaryButton.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -16,6 +19,7 @@ class _AllergiesPageState extends State<AllergiesPage> {
   final userController = Get.find<UserController>();
 
   TextEditingController _allergiesController = TextEditingController();
+  final taskbarController = Get.find<TaskbarController>();
 
   @override
   void dispose() {
@@ -64,87 +68,87 @@ class _AllergiesPageState extends State<AllergiesPage> {
               backgroundColor: Colors.white,
               centerTitle: true,
               automaticallyImplyLeading: false,
-              bottom: PreferredSize(
-                  child: Container(
-                    color: Colors.grey,
-                    height: 1.0,
-                  ),
-                  preferredSize: Size.fromHeight(1.0)),
             ),
-            body: FutureBuilder(
-              future: currentUser(),
-              builder: (BuildContext context, AsyncSnapshot<User> curr) => curr
-                      .hasData
-                  ? SingleChildScrollView(
-                      child: Container(
-                          margin: const EdgeInsets.only(
-                              right: 20, left: 20, top: 30),
-                          child: Form(
-                            key: _formEditKey,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: <Widget>[
-                                TextFormField(
-                                  decoration: InputDecoration(
-                                    contentPadding: EdgeInsets.all(10.0),
-                                    labelText: 'Allergies',
+            body: Padding(
+              padding: EdgeInsets.all(defaultPadding),
+              child: FutureBuilder(
+                future: currentUser(),
+                builder: (BuildContext context, AsyncSnapshot<User> curr) =>
+                    curr.hasData
+                        ? Expanded(
+                            child: SingleChildScrollView(
+                                child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Form(
+                                  key: _formEditKey,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.stretch,
+                                    children: <Widget>[
+                                      TextFormField(
+                                        decoration: InputDecoration(
+                                          contentPadding: EdgeInsets.all(10.0),
+                                          labelText: 'Allergies',
+                                        ),
+                                        controller: _updateText(
+                                            _allergiesController,
+                                            curr.data!.allergies),
+                                        keyboardType: TextInputType.multiline,
+                                        maxLines: 10,
+                                        //initialValue: curr.data!.allergies,
+                                        textAlign: TextAlign.left,
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                        ),
+                                        validator: (text) {
+                                          if (text!.contains(',')) {
+                                            return 'Please remove , (comma)';
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                    ],
                                   ),
-                                  controller: _updateText(_allergiesController,
-                                      curr.data!.allergies),
-                                  keyboardType: TextInputType.multiline,
-                                  maxLines: 10,
-                                  //initialValue: curr.data!.allergies,
-                                  textAlign: TextAlign.left,
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                  ),
-                                  validator: (text) {
-                                    if (text!.contains(',')) {
-                                      return 'Please remove , (comma)';
-                                    }
-                                    return null;
-                                  },
                                 ),
                                 FormSpacing(),
-                                ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    primary: Colors.blueAccent,
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(12)),
-                                  ),
-                                  onPressed: () {
-                                    if (_formEditKey.currentState!.validate()) {
-                                      userController.updateUserAllergies(
-                                          _allergiesController.text.trim());
-                                      Navigator.of(context).pop();
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(SnackBar(
-                                              content: Text(
-                                                  'Allergies Details Updated')));
-                                    }
-                                  },
-                                  child: Text('Confirm'),
+                                Column(
+                                  children: [
+                                    PrimaryButton(
+                                      btnFunction: () {
+                                        if (_formEditKey.currentState!
+                                            .validate()) {
+                                          userController.updateUserAllergies(
+                                              _allergiesController.text.trim());
+                                          taskbarController.updatePageIndex(
+                                              Navigation.settingEnum.index);
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(SnackBar(
+                                                  content: Text(
+                                                      'Allergies Details Updated')));
+                                        }
+                                      },
+                                      buttonText: "Confirm",
+                                      color: kPrimaryBtnColor,
+                                    ),
+                                    FormSpacing(),
+                                    PrimaryButton(
+                                      btnFunction: () {
+                                        taskbarController.updatePageIndex(
+                                            Navigation.settingEnum.index);
+                                      },
+                                      buttonText: "Cancel",
+                                      color: kCancelBtnColor,
+                                    ),
+                                  ],
                                 ),
-                                ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    primary: Colors.red,
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(12)),
-                                  ),
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                  child: Text('Cancel'),
-                                )
                               ],
-                            ),
-                          )))
-                  : Center(
-                      child: CircularProgressIndicator(),
-                    ),
+                            )),
+                          )
+                        : Center(
+                            child: CircularProgressIndicator(),
+                          ),
+              ),
             )),
       ),
     );

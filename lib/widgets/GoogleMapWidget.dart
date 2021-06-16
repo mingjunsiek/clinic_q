@@ -33,7 +33,7 @@ class _GoogleMapWidgetState extends State<GoogleMapWidget> {
 
   void _onMapCreated(GoogleMapController _cntlr) {
     _googleMapController = _cntlr;
-
+    print("LATLNG: ${widget.lat} ${widget.lng}");
     _clinicMarkers.add(Marker(
       markerId: MarkerId(widget.clinicId),
       position: LatLng(widget.lat, widget.lng),

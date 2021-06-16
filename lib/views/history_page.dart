@@ -29,45 +29,59 @@ class _HistoryPageState extends State<HistoryPage> {
                   fontSize: 20,
                 ),
               ),
-              Obx(
-                () => Expanded(
-                  child: ListView.builder(
-                      itemCount: userController.appointmentHistory.length,
-                      itemBuilder: (context, index) {
-                        Appointment appt =
-                            userController.appointmentHistory[index];
-                        return Card(
-                          child: ListTile(
-                            title: Text(
-                              appt.clinicName,
-                              style: TextStyle(color: Colors.black),
-                            ),
-                            subtitle: Text(
-                              DateFormat('dd/MM/yyyy')
-                                  .format(appt.appointmentDate),
-                              style: TextStyle(color: kUnselectedColor),
-                            ),
-                            trailing: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Text(
-                                  "Queue No.",
-                                  style: TextStyle(color: Colors.black),
-                                ),
-                                Container(
-                                  width: displayWidth(context) * 0.05,
-                                ),
-                                Text(
-                                  appt.queueNo.toString(),
-                                  style: TextStyle(color: kUnselectedColor),
-                                ),
-                              ],
-                            ),
+              userController.appointmentHistory.isEmpty
+                  ? Expanded(
+                      flex: 3,
+                      child: Center(
+                        child: Text(
+                          "You have no history",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 20,
                           ),
-                        );
-                      }),
-                ),
-              ),
+                        ),
+                      ),
+                    )
+                  : Obx(
+                      () => Expanded(
+                        child: ListView.builder(
+                            itemCount: userController.appointmentHistory.length,
+                            itemBuilder: (context, index) {
+                              Appointment appt =
+                                  userController.appointmentHistory[index];
+                              return Card(
+                                child: ListTile(
+                                  title: Text(
+                                    appt.clinicName,
+                                    style: TextStyle(color: Colors.black),
+                                  ),
+                                  subtitle: Text(
+                                    DateFormat('dd/MM/yyyy')
+                                        .format(appt.appointmentDate),
+                                    style: TextStyle(color: kUnselectedColor),
+                                  ),
+                                  trailing: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Text(
+                                        "Queue No.",
+                                        style: TextStyle(color: Colors.black),
+                                      ),
+                                      Container(
+                                        width: displayWidth(context) * 0.05,
+                                      ),
+                                      Text(
+                                        appt.queueNo.toString(),
+                                        style:
+                                            TextStyle(color: kUnselectedColor),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            }),
+                      ),
+                    ),
             ],
           ),
         ),

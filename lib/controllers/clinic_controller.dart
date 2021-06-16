@@ -11,7 +11,7 @@ class ClinicController extends GetxController {
   void getClinicList() async {
     await flutterFireController.firestore
         .collection('clinics')
-        .limit(10)
+        .limit(50)
         .get()
         .then((QuerySnapshot querySnapshot) {
       querySnapshot.docs.forEach((doc) {

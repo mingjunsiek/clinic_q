@@ -65,7 +65,11 @@ class _SignUpPageAccountState extends State<SignUpPageAccount> {
                           ),
                           Container(
                             height: displayHeight(context) * 0.3,
+                            child: Image(
+                                image:
+                                    AssetImage('./assets/images/Account.jpg')),
                           ),
+                          FormSpacing(),
                           Form(
                             key: _formKey,
                             child: Column(

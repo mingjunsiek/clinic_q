@@ -102,32 +102,19 @@ class _MapScreenState extends State<MapScreen> {
     });
 
     _location.getLocation().then((LocationData l) {
+      _initialCameraPosition = LatLng(
+        l.latitude ?? 1.3538107695634425,
+        l.longitude ?? 103.85797370238132,
+      );
       _googleMapController.animateCamera(
         CameraUpdate.newCameraPosition(
           CameraPosition(
-              target: LatLng(
-                l.latitude ?? 1.3538107695634425,
-                l.longitude ?? 103.85797370238132,
-              ),
-              zoom: 16),
+            target: _initialCameraPosition,
+            zoom: 16,
+          ),
         ),
       );
     });
-
-    // setState(() {
-    //   _location.onLocationChanged.listen((LocationData l) {
-    //     _googleMapController.animateCamera(
-    //       CameraUpdate.newCameraPosition(
-    //         CameraPosition(
-    //             target: LatLng(
-    //               l.latitude ?? 1.3538107695634425,
-    //               l.longitude ?? 103.85797370238132,
-    //             ),
-    //             zoom: 16),
-    //       ),
-    //     );
-    //   });
-    // });
   }
 
   @override

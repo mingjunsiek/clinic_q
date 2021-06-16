@@ -1,7 +1,6 @@
 import 'package:clinic_q/controllers/clinic_controller.dart';
 import 'package:clinic_q/controllers/clinic_info_controller.dart';
 import 'package:clinic_q/controllers/taskbar_controller.dart';
-import 'package:clinic_q/utils/size_helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:clinic_q/utils/constants.dart';
 import 'package:get/get.dart';
@@ -48,38 +47,46 @@ class NearbyClinicPanel extends StatelessWidget {
                             taskbarController.updateToClinicInfo(
                                 clinicController.clinicList[index].clinicID);
                           },
-                          leading: FittedBox(
-                            fit: BoxFit.contain,
-                            child: Container(
-                              width: displayWidth(context) * 0.6,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    '${clinicController.clinicList[index].clinicName}',
-                                    style: TextStyle(color: Colors.black),
-                                  ),
-                                  Text(
-                                    '${clinicController.clinicList[index].streetName}',
-                                    style: TextStyle(color: kUnselectedColor),
-                                  ),
-                                ],
-                              ),
-                            ),
+                          // leading: FittedBox(
+                          //   fit: BoxFit.contain,
+                          //   child: Container(
+                          //     width: displayWidth(context) * 0.6,
+                          //     child: Column(
+                          //       crossAxisAlignment: CrossAxisAlignment.start,
+                          //       children: [
+                          //         Text(
+                          //           '${clinicController.clinicList[index].clinicName}',
+                          //           style: TextStyle(color: Colors.black),
+                          //         ),
+                          //         Text(
+                          //           '${clinicController.clinicList[index].streetName}',
+                          //           style: TextStyle(color: kUnselectedColor),
+                          //         ),
+                          //       ],
+                          //     ),
+                          //   ),
+                          // ),
+                          title: Text(
+                            '${clinicController.clinicList[index].clinicName}',
+                            style: TextStyle(color: Colors.black),
                           ),
-                          trailing: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                "Current Queue",
-                                style: TextStyle(color: Colors.black),
-                              ),
-                              Text(
-                                "5/25",
-                                style: TextStyle(color: kUnselectedColor),
-                              ),
-                            ],
+                          subtitle: Text(
+                            '${clinicController.clinicList[index].streetName}',
+                            style: TextStyle(color: kUnselectedColor),
                           ),
+                          // trailing: Column(
+                          //   crossAxisAlignment: CrossAxisAlignment.center,
+                          //   children: [
+                          //     Text(
+                          //       "Current Queue",
+                          //       style: TextStyle(color: Colors.black),
+                          //     ),
+                          //     Text(
+                          //       "5/25",
+                          //       style: TextStyle(color: kUnselectedColor),
+                          //     ),
+                          //   ],
+                          // ),
                         ),
                       ),
                     ],

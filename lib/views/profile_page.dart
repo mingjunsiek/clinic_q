@@ -1,7 +1,5 @@
 import 'package:clinic_q/controllers/taskbar_controller.dart';
 import 'package:clinic_q/utils/constants.dart';
-import 'package:clinic_q/views/allergies_page.dart';
-import 'package:clinic_q/views/personal_info_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

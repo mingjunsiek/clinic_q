@@ -1,6 +1,8 @@
+import 'package:clinic_q/controllers/taskbar_controller.dart';
 import 'package:clinic_q/model/user.dart';
 import 'package:clinic_q/widgets/FormSpacing.dart';
 import 'package:clinic_q/controllers/user_controller.dart';
+import 'package:clinic_q/widgets/PrimaryButton.dart';
 import 'package:flutter/material.dart';
 import 'package:clinic_q/utils/constants.dart';
 import 'package:get/get.dart';
@@ -15,6 +17,7 @@ class PersonalInfoPage extends StatefulWidget {
 class _PersonalInfoPageState extends State<PersonalInfoPage> {
   final _formEditKey = GlobalKey<FormState>();
   final userController = Get.find<UserController>();
+  final taskbarController = Get.find<TaskbarController>();
 
   TextEditingController _nricController = TextEditingController();
   TextEditingController _firstNameController = TextEditingController();
@@ -155,13 +158,8 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
                                         : null,
                               ),
                               FormSpacing(),
-                              ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  primary: Colors.blueAccent,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(12)),
-                                ),
-                                onPressed: () {
+                              PrimaryButton(
+                                btnFunction: () {
                                   if (_formEditKey.currentState!.validate()) {
                                     userController.updateUserDetails(
                                       _nricController.text.trim(),
@@ -169,26 +167,26 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
                                       _lastNameController.text.trim(),
                                       _phoneController.text.trim(),
                                     );
-                                    Navigator.of(context).pop();
+                                    taskbarController.updatePageIndex(
+                                        Navigation.settingEnum.index);
                                     ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(
                                             content:
                                                 Text('User Details Updated')));
                                   }
                                 },
-                                child: Text('Confirm'),
+                                buttonText: "Confirm",
+                                color: kPrimaryBtnColor,
                               ),
-                              ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  primary: Colors.red,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(12)),
-                                ),
-                                onPressed: () {
-                                  Navigator.of(context).pop();
+                              FormSpacing(),
+                              PrimaryButton(
+                                btnFunction: () {
+                                  taskbarController.updatePageIndex(
+                                      Navigation.settingEnum.index);
                                 },
-                                child: Text('Cancel'),
-                              )
+                                buttonText: "Cancel",
+                                color: kCancelBtnColor,
+                              ),
                             ],
                           ),
                         )))

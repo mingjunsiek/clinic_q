@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:clinic_q/utils/constants.dart';
 
 class OverviewCard extends StatelessWidget {
   const OverviewCard(this.overviewInformation);

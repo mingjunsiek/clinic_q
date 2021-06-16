@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:clinic_q/controllers/signup_controller.dart';
 import 'package:clinic_q/utils/constants.dart';
 import 'package:clinic_q/utils/size_helpers.dart';
@@ -55,7 +57,10 @@ class _SignUpPageAllergiesState extends State<SignUpPageAllergies> {
                         ),
                         Container(
                           height: displayHeight(context) * 0.4,
+                          child: Image(
+                              image: AssetImage('./assets/images/Allergy.jpg')),
                         ),
+                        FormSpacing(),
                         FormTextField(
                           labelText: "Input your allergies if any...",
                           maxLine: 4,

@@ -21,7 +21,6 @@ class ClinicInfoController extends GetxController {
     if (snapshot.exists) {
       currentQueue.value = (snapshot.data() as dynamic)['currentQueue'];
       totalQueue.value = (snapshot.data() as dynamic)['totalInQueue'];
-      print("SNAPSHOT ${currentQueue.value}");
       final Stream<DocumentSnapshot> _queueStream = flutterFireController
           .firestore
           .collection('clinics')
@@ -33,7 +32,6 @@ class ClinicInfoController extends GetxController {
       _queueStream.listen((DocumentSnapshot doc) {
         int queue = (doc.data() as dynamic)['currentQueue'];
         int totalQ = (doc.data() as dynamic)['totalInQueue'];
-        print("STREAM $queue");
         if (queue != currentQueue.value) {
           currentQueue.value = queue;
           totalQueue.value = totalQ;
