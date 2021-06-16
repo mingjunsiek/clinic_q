@@ -1,6 +1,5 @@
 import 'package:clinic_q/controllers/clinic_controller.dart';
 import 'package:clinic_q/controllers/taskbar_controller.dart';
-import 'package:clinic_q/model/clinic.dart';
 import 'package:clinic_q/utils/size_helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:clinic_q/utils/constants.dart';
