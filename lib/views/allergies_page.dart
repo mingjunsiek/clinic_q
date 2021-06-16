@@ -23,6 +23,12 @@ class _AllergiesPageState extends State<AllergiesPage> {
     _allergiesController.dispose();
   }
 
+  TextEditingController _updateText(
+      TextEditingController controller, String text) {
+    controller.text = text;
+    return controller;
+  }
+
   User cu = new User(
       nric: " ",
       email: " ",
@@ -80,12 +86,15 @@ class _AllergiesPageState extends State<AllergiesPage> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: <Widget>[
                                 TextFormField(
+                                  decoration: InputDecoration(
+                                    contentPadding: EdgeInsets.all(10.0),
+                                    labelText: 'Allergies',
+                                  ),
+                                  controller: _updateText(_allergiesController,
+                                      curr.data!.allergies),
                                   keyboardType: TextInputType.multiline,
                                   maxLines: 10,
                                   //initialValue: curr.data!.allergies,
-                                  decoration: InputDecoration(
-                                    hintText: curr.data!.allergies,
-                                  ),
                                   textAlign: TextAlign.left,
                                   style: TextStyle(
                                     color: Colors.black,

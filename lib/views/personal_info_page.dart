@@ -2,6 +2,7 @@ import 'package:clinic_q/model/user.dart';
 import 'package:clinic_q/widgets/FormSpacing.dart';
 import 'package:clinic_q/controllers/user_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:clinic_q/utils/constants.dart';
 import 'package:get/get.dart';
 
 class PersonalInfoPage extends StatefulWidget {
@@ -100,12 +101,9 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
                                 ),
                                 textAlign: TextAlign.left,
                                 style: TextStyle(color: Colors.black),
-                                validator: (text) {
-                                  if (text == null || text.isEmpty) {
-                                    return 'NRIC cannot be empty!';
-                                  }
-                                  return null;
-                                },
+                                validator: (value) => !isNRIC(value as String)
+                                    ? "Please enter a valid NRIC"
+                                    : null,
                               ),
                               FormSpacing(),
                               TextFormField(
@@ -151,12 +149,10 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
                                 ),
                                 textAlign: TextAlign.left,
                                 style: TextStyle(color: Colors.black),
-                                validator: (text) {
-                                  if (text == null || text.isEmpty) {
-                                    return 'Phone number cannot be empty!';
-                                  }
-                                  return null;
-                                },
+                                validator: (value) =>
+                                    !isPhoneNum(value as String)
+                                        ? "Please enter a valid phone number"
+                                        : null,
                               ),
                               FormSpacing(),
                               ElevatedButton(
