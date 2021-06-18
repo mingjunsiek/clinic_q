@@ -1,4 +1,3 @@
-import 'package:clinic_q/controllers/signup_controller.dart';
 import 'package:clinic_q/utils/constants.dart';
 import 'package:clinic_q/utils/size_helpers.dart';
 import 'package:clinic_q/views/taskbar.dart';
